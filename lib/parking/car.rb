@@ -2,13 +2,24 @@
 
 module Parking
   class Car < SimpleDelegator
-    def initialize(color = [0.8, 0.8, 0.8])
+    # Speed modifier X-axis (forward and backward)
+    SPEED_X = 0.1
+
+    # Speed modifier Z-axis (left and right)
+    SPEED_Z = 0.1
+
+    attr_reader :initial_rotation
+
+    def initialize(color: [0.8, 0.8, 0.8], r: 1.0)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
 
       self.receive_shadow = true
       self.cast_shadow = true
 
       position.y = 0.75 if Parking.options.fiat?
+
+      # Rotate to correct orientation
+      @initial_rotation = rotation.y = r * (Math::PI / 2)
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
@@ -18,11 +29,13 @@ module Parking
     end
 
     def forward
-      position.x += 0.05
+      position.x += Math.cos(rotation.y - initial_rotation) * SPEED_X
+      position.z -= Math.sin(rotation.y - initial_rotation) * SPEED_Z
     end
 
     def backward
-      position.x -= 0.05
+      position.x -= Math.cos(rotation.y - initial_rotation) * SPEED_X
+      position.z += Math.sin(rotation.y - initial_rotation) * SPEED_Z
     end
 
     def left

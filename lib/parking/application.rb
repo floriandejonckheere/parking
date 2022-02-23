@@ -70,9 +70,7 @@ module Parking
     end
 
     def car
-      @car ||= Car.new([1.0, 0.0, 0.0]).tap do |car|
-        car.rotation.y = Math::PI / 2
-      end
+      @car ||= Car.new(color: [1.0, 0.0, 0.0])
     end
 
     def parked_cars
@@ -88,8 +86,7 @@ module Parking
         { x: 6.0, z: 3.0 },
         { x: 12.0, z: 3.0 },
       ].map do |coords|
-        Car.new.tap do |car|
-          car.rotation.y = coords.fetch(:r, 1.0) * Math::PI / 2
+        Car.new(r: coords.fetch(:r, 1.0)).tap do |car|
           car.position.x = coords[:x]
           car.position.z = coords[:z]
         end
