@@ -19,6 +19,9 @@ jobs:
           ruby-version: 3.0
           bundler-cache: true
 
+      - name: Install dependencies
+        run: sudo apt-get install libglfw3
+
       - name: Test
         run: |
           git config --global user.email "you@example.com"
