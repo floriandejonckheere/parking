@@ -34,7 +34,10 @@ module Parking
     def load_resources
       @car = Car.new
 
+      car.rotation.y = Math::PI / 2
+
       scene.add(car.object)
+
       scene.print_tree
     end
 
@@ -75,7 +78,7 @@ module Parking
 
     def render
       renderer.window.run do
-        car.rotation.y += 0.05
+        car.position.x += 0.05
 
         renderer.render(scene, camera)
       end
