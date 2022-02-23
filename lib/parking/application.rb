@@ -2,7 +2,11 @@
 
 module Parking
   class Application
-    attr_reader :car
+    attr_reader :cars, :car
+
+    def initialize
+      @cars = []
+    end
 
     def start
       setup_renderer
@@ -32,6 +36,22 @@ module Parking
     end
 
     def load_resources
+      # Parked cars
+      cars << Car.new.tap do |car|
+        car.rotation.y = Math::PI / 2
+        car.position.x = -5.0
+        car.position.z = -2.5
+      end
+
+      cars << Car.new.tap do |car|
+        car.rotation.y = Math::PI / 2
+        car.position.x = 5.0
+        car.position.z = -2.5
+      end
+
+      cars.each { |car| scene.add(car.object) }
+
+      # Actor car
       @car = Car.new
 
       car.rotation.y = Math::PI / 2
@@ -78,7 +98,7 @@ module Parking
 
     def render
       renderer.window.run do
-        car.position.x += 0.05
+        car.position.x += 0.01
 
         renderer.render(scene, camera)
       end
