@@ -23,5 +23,34 @@ module Parking
     end
 
     delegate :is_a?, to: :__getobj__
+
+    class Container < SimpleDelegator
+      attr_reader :camera
+
+      def initialize(camera)
+        super(Mittsu::Object3D.new)
+        @camera = camera
+
+        add(camera)
+      end
+
+      def sideways
+        rotation.x = 0
+        rotation.y = 0
+        rotation.z = 0
+
+        camera.sideways
+      end
+
+      def top_down
+        rotation.x = 0
+        rotation.y = 0
+        rotation.z = 0
+
+        camera.top_down
+      end
+
+      delegate :is_a?, to: :__getobj__
+    end
   end
 end

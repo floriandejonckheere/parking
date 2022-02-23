@@ -53,9 +53,9 @@ module Parking
       renderer.window.on_key_typed do |key|
         case key
         when GLFW_KEY_UP
-          top_down
+          camera_container.top_down
         when GLFW_KEY_DOWN
-          sideways
+          camera_container.sideways
         end
       end
 
@@ -143,25 +143,7 @@ module Parking
     end
 
     def camera_container
-      @camera_container ||= Mittsu::Object3D.new.tap do |container|
-        container.add(camera)
-      end
-    end
-
-    def top_down
-      camera_container.rotation.x = 0
-      camera_container.rotation.y = 0
-      camera_container.rotation.z = 0
-
-      camera.top_down
-    end
-
-    def sideways
-      camera_container.rotation.x = 0
-      camera_container.rotation.y = 0
-      camera_container.rotation.z = 0
-
-      camera.sideways
+      @camera_container ||= Camera::Container.new(camera)
     end
 
     def mouse_delta
