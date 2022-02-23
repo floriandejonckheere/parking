@@ -36,3 +36,5 @@ Execute `bin/parking --help` to see all available commands and their arguments.
 ## License
 
 See [LICENSE.md](LICENSE.md).
+
+[1956 Fiat 500 Low Poly](https://skfb.ly/ooxzE) by Montero, used under [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/).

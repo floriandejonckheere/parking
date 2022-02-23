@@ -4,7 +4,7 @@ module Parking
   class Options
     attr_accessor :help
 
-    attr_writer :width, :height
+    attr_writer :width, :height, :fiat
 
     def width
       @width ||= 800
@@ -16,6 +16,14 @@ module Parking
 
     def aspect
       width.to_f / height
+    end
+
+    def fiat
+      @fiat ||= false
+    end
+
+    def fiat?
+      @fiat.present?
     end
 
     def verbose=(value)

@@ -2,13 +2,13 @@
 
 module Parking
   class Car < SimpleDelegator
-    RESOURCE_NAME = "car"
-
     def initialize(color = [0.8, 0.8, 0.8])
-      super(loader.load(Parking.root.join("res/#{RESOURCE_NAME}.obj"), "#{RESOURCE_NAME}.mtl"))
+      super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
 
       self.receive_shadow = true
       self.cast_shadow = true
+
+      position.y = 0.75 if Parking.options.fiat?
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
@@ -20,6 +20,10 @@ module Parking
     delegate :is_a?, to: :__getobj__
 
     private
+
+    def name
+      Parking.options.fiat? ? :fiat : :car
+    end
 
     def loader
       @loader ||= Mittsu::OBJMTLLoader.new
