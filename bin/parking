@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../config/application"
+
+begin
+  Parking::CLI.new(ARGV).start
+rescue Parking::ExitError => e
+  exit(e.message.to_i)
+end

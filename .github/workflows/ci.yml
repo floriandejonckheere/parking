@@ -1,0 +1,32 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    name: Test application
+    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+
+      - name: Test
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+          bundle exec rspec --profile 10 --format progress
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+
+      - name: Lint
+        run: bundle exec rubocop --parallel --display-cop-names
