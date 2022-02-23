@@ -10,7 +10,7 @@ module Parking
 
     def sideways
       position.z = 7.5
-      position.y = 7.5
+      position.y = 5
 
       rotation.x = -0.5
     end
