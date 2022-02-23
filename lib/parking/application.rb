@@ -67,7 +67,7 @@ module Parking
     end
 
     def car
-      @car ||= Car.new.tap do |car|
+      @car ||= Car.new([1.0, 0.0, 0.0]).tap do |car|
         car.rotation.y = Math::PI / 2
       end
     end
