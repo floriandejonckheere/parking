@@ -8,6 +8,9 @@ module Parking
     # Speed modifier Z-axis (left and right)
     SPEED_Z = 0.1
 
+    # Steering modifier
+    STEERING = 0.03
+
     # Facing left/right
     LEFT = -1.0
     RIGHT = 1.0
@@ -50,13 +53,11 @@ module Parking
     end
 
     def left
-      @steering = 0.03
-      # rotation.y += 0.03
+      @steering = STEERING
     end
 
     def right
-      @steering = -0.03
-      # rotation.y -= 0.03
+      @steering = -STEERING
     end
 
     delegate :is_a?, to: :__getobj__
