@@ -52,9 +52,9 @@ module Parking
 
       renderer.window.on_key_typed do |key|
         case key
-        when GLFW_KEY_UP
+        when GLFW_KEY_PAGE_UP
           camera_container.top_down
-        when GLFW_KEY_DOWN
+        when GLFW_KEY_PAGE_DOWN
           camera_container.sideways
         end
       end
