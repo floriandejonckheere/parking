@@ -7,11 +7,11 @@ module Parking
     attr_writer :width, :height, :fiat
 
     def width
-      @width ||= 800
+      @width ||= 1280
     end
 
     def height
-      @height ||= 600
+      @height ||= 720
     end
 
     def aspect
