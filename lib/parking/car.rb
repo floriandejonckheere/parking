@@ -2,11 +2,8 @@
 
 module Parking
   class Car < SimpleDelegator
-    # Speed modifier X-axis (forward and backward)
-    SPEED_X = 0.1
-
-    # Speed modifier Z-axis (left and right)
-    SPEED_Z = 0.05
+    # Speed modifier
+    SPEED = 0.1
 
     # Steering modifier
     STEERING = 0.03
@@ -39,15 +36,15 @@ module Parking
     end
 
     def forward
-      position.x += Math.cos(rotation.y - direction) * SPEED_X
-      position.z -= Math.sin(rotation.y - direction) * SPEED_Z
+      position.x += Math.cos(rotation.y - direction) * SPEED
+      position.z -= Math.sin(rotation.y - direction) * SPEED
 
       rotation.y += steering
     end
 
     def backward
-      position.x -= Math.cos(rotation.y - direction) * SPEED_X
-      position.z += Math.sin(rotation.y - direction) * SPEED_Z
+      position.x -= Math.cos(rotation.y - direction) * SPEED
+      position.z += Math.sin(rotation.y - direction) * SPEED
 
       rotation.y += steering
     end
