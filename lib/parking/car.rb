@@ -5,14 +5,11 @@ module Parking
     # Speed modifier
     SPEED = 0.1
 
-    # Steering modifier
-    STEERING = 0.03
-
     # Facing left/right
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :direction, :steering
+    attr_reader :direction, :steering_wheel
 
     def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
@@ -22,11 +19,11 @@ module Parking
 
       position.y = 0.75 if Parking.options.fiat?
 
+      # Set steering wheel
+      @steering_wheel = SteeringWheel.new
+
       # Rotate to correct orientation
       @direction = rotation.y = direction * (Math::PI / 2)
-
-      # Set steering wheel
-      @steering = 0.0
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
@@ -39,26 +36,14 @@ module Parking
       position.x += Math.cos(rotation.y - direction) * SPEED
       position.z -= Math.sin(rotation.y - direction) * SPEED
 
-      rotation.y += steering
+      rotation.y += steering_wheel.direction
     end
 
     def backward
       position.x -= Math.cos(rotation.y - direction) * SPEED
       position.z += Math.sin(rotation.y - direction) * SPEED
 
-      rotation.y += steering
-    end
-
-    def straight
-      @steering = 0.0
-    end
-
-    def left
-      @steering = STEERING
-    end
-
-    def right
-      @steering = -STEERING
+      rotation.y += steering_wheel.direction
     end
 
     delegate :is_a?, to: :__getobj__
