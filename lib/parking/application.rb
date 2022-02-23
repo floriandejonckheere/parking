@@ -34,6 +34,12 @@ module Parking
         camera.update_projection_matrix
       end
 
+      renderer.window.on_scroll do |offset|
+        scroll_factor = (1.5**(offset.y * 0.1))
+        camera.zoom *= scroll_factor
+        camera.update_projection_matrix
+      end
+
       renderer.window.on_mouse_button_pressed do |button, position|
         next unless button == GLFW_MOUSE_BUTTON_LEFT
 
