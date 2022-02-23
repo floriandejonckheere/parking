@@ -39,6 +39,9 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
 

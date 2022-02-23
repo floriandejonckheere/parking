@@ -6,7 +6,7 @@ module Parking
     SPEED_X = 0.1
 
     # Speed modifier Z-axis (left and right)
-    SPEED_Z = 0.1
+    SPEED_Z = 0.05
 
     # Steering modifier
     STEERING = 0.03
@@ -50,6 +50,10 @@ module Parking
       position.z += Math.sin(rotation.y - direction) * SPEED_Z
 
       rotation.y += steering
+    end
+
+    def straight
+      @steering = 0.0
     end
 
     def left
