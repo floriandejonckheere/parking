@@ -10,6 +10,8 @@ module Parking
     def initialize(args)
       @parser = OptionParser.new("#{File.basename($PROGRAM_NAME)} [global options] command") do |o|
         o.on("Global options:")
+        o.on("-w", "--width=WIDTH", Integer, "Screen width")
+        o.on("-H", "--height=WIDTH", Integer, "Screen height")
         o.on("-v", "--verbose", "Turn on verbose logging")
         o.on("-D", "--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
@@ -33,7 +35,9 @@ module Parking
     end
 
     def start
-      raise NotImplementedError
+      Parking::Application
+        .new
+        .start
     rescue UsageError => e
       # Don't print tail if no message was passed
       return usage if e.message == e.class.name
