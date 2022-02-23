@@ -7,8 +7,8 @@ module Parking
 
     def start
       # Add cars
-      parked_cars.each { |car| scene.add(car.object) }
-      scene.add(car.object)
+      parked_cars.each { |car| scene.add(car) }
+      scene.add(car)
 
       scene.print_tree
 
