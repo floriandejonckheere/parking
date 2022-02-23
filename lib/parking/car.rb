@@ -17,6 +17,22 @@ module Parking
       end
     end
 
+    def forward
+      position.x += 0.05
+    end
+
+    def backward
+      position.x -= 0.05
+    end
+
+    def left
+      rotation.y += 0.03
+    end
+
+    def right
+      rotation.y -= 0.03
+    end
+
     delegate :is_a?, to: :__getobj__
 
     private
