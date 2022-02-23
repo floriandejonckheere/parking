@@ -16,7 +16,7 @@ module Parking
     end
 
     def top_down
-      position.z = 0
+      position.z = -1.5
       position.y = 10.0
 
       rotation.x = -Math::PI / 2
