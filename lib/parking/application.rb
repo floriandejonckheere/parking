@@ -108,12 +108,7 @@ module Parking
     end
 
     def camera
-      @camera ||= Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0).tap do |camera|
-        camera.position.z = 7.5
-        camera.position.y = 7.5
-
-        camera.rotation.x = -0.5
-      end
+      @camera ||= Camera.new
     end
   end
 end
