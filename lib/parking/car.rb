@@ -8,9 +8,13 @@ module Parking
     # Speed modifier Z-axis (left and right)
     SPEED_Z = 0.1
 
-    attr_reader :initial_rotation
+    # Facing left/right
+    LEFT = -1.0
+    RIGHT = 1.0
 
-    def initialize(color: [0.8, 0.8, 0.8], r: 1.0)
+    attr_reader :direction
+
+    def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
 
       self.receive_shadow = true
@@ -19,7 +23,7 @@ module Parking
       position.y = 0.75 if Parking.options.fiat?
 
       # Rotate to correct orientation
-      @initial_rotation = rotation.y = r * (Math::PI / 2)
+      @direction = rotation.y = direction * (Math::PI / 2)
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
@@ -29,13 +33,13 @@ module Parking
     end
 
     def forward
-      position.x += Math.cos(rotation.y - initial_rotation) * SPEED_X
-      position.z -= Math.sin(rotation.y - initial_rotation) * SPEED_Z
+      position.x += Math.cos(rotation.y - direction) * SPEED_X
+      position.z -= Math.sin(rotation.y - direction) * SPEED_Z
     end
 
     def backward
-      position.x -= Math.cos(rotation.y - initial_rotation) * SPEED_X
-      position.z += Math.sin(rotation.y - initial_rotation) * SPEED_Z
+      position.x -= Math.cos(rotation.y - direction) * SPEED_X
+      position.z += Math.sin(rotation.y - direction) * SPEED_Z
     end
 
     def left
