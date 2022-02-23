@@ -28,6 +28,15 @@ module Parking
         camera.update_projection_matrix
       end
 
+      renderer.window.on_key_typed do |key|
+        case key
+        when GLFW_KEY_UP
+          camera.top_down
+        when GLFW_KEY_DOWN
+          camera.sideways
+        end
+      end
+
       renderer.window.run do
         car.position.x += 0.01
 
