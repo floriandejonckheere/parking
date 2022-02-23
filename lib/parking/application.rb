@@ -73,22 +73,20 @@ module Parking
     end
 
     def parked_cars
-      cars = []
+      [
+        { x: -6.0, z: -3.0 },
+        { x: 6.0, z: -3.0 },
 
-      # Parked cars
-      cars << Car.new.tap do |car|
-        car.rotation.y = Math::PI / 2
-        car.position.x = -5.0
-        car.position.z = -2.5
+        { x: -6.0, z: 3.0 },
+        { x: 0.0, z: 3.0 },
+        { x: 6.0, z: 3.0 },
+      ].map do |coords|
+        Car.new.tap do |car|
+          car.rotation.y = Math::PI / 2
+          car.position.x = coords[:x]
+          car.position.z = coords[:z]
+        end
       end
-
-      cars << Car.new.tap do |car|
-        car.rotation.y = Math::PI / 2
-        car.position.x = 5.0
-        car.position.z = -2.5
-      end
-
-      cars
     end
 
     def floor
