@@ -62,10 +62,11 @@ module Parking
       renderer.window.run do
         renderer.render(scene, camera)
 
-        car.forward if renderer.window.key_down?(GLFW_KEY_UP)
-        car.backward if renderer.window.key_down?(GLFW_KEY_DOWN)
         car.left if renderer.window.key_down?(GLFW_KEY_LEFT)
         car.right if renderer.window.key_down?(GLFW_KEY_RIGHT)
+
+        car.forward if renderer.window.key_down?(GLFW_KEY_UP)
+        car.backward if renderer.window.key_down?(GLFW_KEY_DOWN)
       end
     end
 

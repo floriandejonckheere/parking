@@ -12,7 +12,7 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :direction
+    attr_reader :direction, :wheels, :steering
 
     def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
@@ -25,6 +25,9 @@ module Parking
       # Rotate to correct orientation
       @direction = rotation.y = direction * (Math::PI / 2)
 
+      # Set steering wheel
+      @steering = 0.0
+
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
         child.receive_shadow = true
@@ -35,19 +38,25 @@ module Parking
     def forward
       position.x += Math.cos(rotation.y - direction) * SPEED_X
       position.z -= Math.sin(rotation.y - direction) * SPEED_Z
+
+      rotation.y += steering
     end
 
     def backward
       position.x -= Math.cos(rotation.y - direction) * SPEED_X
       position.z += Math.sin(rotation.y - direction) * SPEED_Z
+
+      rotation.y += steering
     end
 
     def left
-      rotation.y += 0.03
+      @steering = 0.03
+      # rotation.y += 0.03
     end
 
     def right
-      rotation.y -= 0.03
+      @steering = -0.03
+      # rotation.y -= 0.03
     end
 
     delegate :is_a?, to: :__getobj__
