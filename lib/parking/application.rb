@@ -2,40 +2,48 @@
 
 module Parking
   class Application
-    attr_reader :cars, :car
-
-    def initialize
-      @cars = []
-    end
-
     def start
-      setup_renderer
+      # Add cars
+      parked_cars.each { |car| scene.add(car.object) }
+      scene.add(car.object)
 
-      load_resources
+      scene.print_tree
 
-      generate_floor
+      # Add floor
+      scene.add(floor)
 
-      create_lights
-
-      setup_camera
+      # Add lights
+      scene.add(ambient_light)
+      scene.add(spot_light)
 
       render
     end
 
     private
 
-    def setup_renderer
-      renderer.shadow_map_enabled = true
-      renderer.shadow_map_type = Mittsu::PCFSoftShadowMap
-
+    def render
       renderer.window.on_resize do |width, height|
         renderer.set_viewport(0, 0, width, height)
         camera.aspect = width.to_f / height
         camera.update_projection_matrix
       end
+
+      renderer.window.run do
+        car.position.x += 0.01
+
+        renderer.render(scene, camera)
+      end
     end
 
-    def load_resources
+    def car
+      @car ||= Car.new.tap do |car|
+        car.rotation.y = Math::PI / 2
+      end
+    end
+
+    def parked_cars
+      cars = []
+
       # Parked cars
       cars << Car.new.tap do |car|
         car.rotation.y = Math::PI / 2
@@ -49,58 +57,38 @@ module Parking
         car.position.z = -2.5
       end
 
-      cars.each { |car| scene.add(car.object) }
-
-      # Actor car
-      @car = Car.new
-
-      car.rotation.y = Math::PI / 2
-
-      scene.add(car.object)
-
-      scene.print_tree
+      cars
     end
 
-    def generate_floor
-      floor = Mittsu::Mesh.new(
+    def floor
+      Mittsu::Mesh.new(
         Mittsu::BoxGeometry.new(1000.0, 1.0, 1000.0),
         Mittsu::MeshPhongMaterial.new(color: 0xffffff),
-      )
-      floor.position.y = -0.5
-      floor.receive_shadow = true
-      scene.add(floor)
+      ).tap do |floor|
+        floor.position.y = -0.5
+        floor.receive_shadow = true
+      end
     end
 
-    def create_lights
-      scene.add Mittsu::AmbientLight.new(0xffffff)
-
-      light = Mittsu::SpotLight.new(0xffffff, 1.0)
-      light.position.set(300.0, 200.0, 0.0)
-
-      light.cast_shadow = true
-      light.shadow_darkness = 0.5
-
-      light.shadow_map_width = 1024
-      light.shadow_map_height = 1024
-
-      light.shadow_camera_near = 1.0
-      light.shadow_camera_far = 2000.0
-      light.shadow_camera_fov = 60.0
-
-      light.shadow_camera_visible = false
-      scene.add(light)
+    def ambient_light
+      Mittsu::AmbientLight.new(0xffffff)
     end
 
-    def setup_camera
-      camera.position.z = 10.0
-      camera.position.y = 5.0
-    end
+    def spot_light
+      Mittsu::SpotLight.new(0xffffff, 1.0).tap do |light|
+        light.position.set(300.0, 200.0, 0.0)
 
-    def render
-      renderer.window.run do
-        car.position.x += 0.01
+        light.cast_shadow = true
+        light.shadow_darkness = 0.5
 
-        renderer.render(scene, camera)
+        light.shadow_map_width = 1024
+        light.shadow_map_height = 1024
+
+        light.shadow_camera_near = 1.0
+        light.shadow_camera_far = 2000.0
+        light.shadow_camera_fov = 60.0
+
+        light.shadow_camera_visible = false
       end
     end
 
@@ -109,7 +97,10 @@ module Parking
         width: Parking.options.width,
         height: Parking.options.height,
         title: "Parking",
-      )
+      ).tap do |renderer|
+        renderer.shadow_map_enabled = true
+        renderer.shadow_map_type = Mittsu::PCFSoftShadowMap
+      end
     end
 
     def scene
@@ -117,7 +108,10 @@ module Parking
     end
 
     def camera
-      @camera ||= Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0)
+      @camera ||= Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0).tap do |camera|
+        camera.position.z = 10.0
+        camera.position.y = 5.0
+      end
     end
   end
 end
