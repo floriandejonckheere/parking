@@ -30,6 +30,9 @@ Metrics/BlockLength:
     - spec/**/*
     - "*.gemspec"
 
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Enabled: false
 

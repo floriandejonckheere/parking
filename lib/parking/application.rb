@@ -2,6 +2,9 @@
 
 module Parking
   class Application
+    X_AXIS = Mittsu::Vector3.new(1.0, 0.0, 0.0)
+    Y_AXIS = Mittsu::Vector3.new(0.0, 1.0, 0.0)
+
     def start
       # Add cars
       parked_cars.each { |car| scene.add(car.object) }
@@ -16,6 +19,9 @@ module Parking
       scene.add(ambient_light)
       scene.add(spot_light)
 
+      # Add camera
+      scene.add(camera_container)
+
       render
     end
 
@@ -28,12 +34,28 @@ module Parking
         camera.update_projection_matrix
       end
 
+      renderer.window.on_mouse_button_pressed do |button, position|
+        next unless button == GLFW_MOUSE_BUTTON_LEFT
+
+        last_mouse_position.copy(position)
+      end
+
+      renderer.window.on_mouse_move do |position|
+        next unless renderer.window.mouse_button_down?(GLFW_MOUSE_BUTTON_LEFT)
+
+        mouse_delta.copy(last_mouse_position).sub(position)
+        last_mouse_position.copy(position)
+
+        camera_container.rotate_on_axis(Y_AXIS, mouse_delta.x * 0.01)
+        camera_container.rotate_on_axis(X_AXIS, mouse_delta.y * 0.01)
+      end
+
       renderer.window.on_key_typed do |key|
         case key
         when GLFW_KEY_UP
-          camera.top_down
+          top_down
         when GLFW_KEY_DOWN
-          camera.sideways
+          sideways
         end
       end
 
@@ -118,6 +140,36 @@ module Parking
 
     def camera
       @camera ||= Camera.new
+    end
+
+    def camera_container
+      @camera_container ||= Mittsu::Object3D.new.tap do |container|
+        container.add(camera)
+      end
+    end
+
+    def top_down
+      camera_container.rotation.x = 0
+      camera_container.rotation.y = 0
+      camera_container.rotation.z = 0
+
+      camera.top_down
+    end
+
+    def sideways
+      camera_container.rotation.x = 0
+      camera_container.rotation.y = 0
+      camera_container.rotation.z = 0
+
+      camera.sideways
+    end
+
+    def mouse_delta
+      @mouse_delta ||= Mittsu::Vector2.new
+    end
+
+    def last_mouse_position
+      @last_mouse_position ||= Mittsu::Vector2.new
     end
   end
 end
