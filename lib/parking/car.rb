@@ -15,7 +15,7 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :direction, :wheels, :steering
+    attr_reader :direction, :steering
 
     def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
