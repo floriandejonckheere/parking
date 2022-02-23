@@ -11,6 +11,8 @@ gem "colorize", "~> 0.8"
 gem "dotenv", "~> 2.7"
 gem "zeitwerk", "~> 2.4"
 
+gem "mittsu"
+
 group :development, :test do
   gem "rubocop"
   gem "rubocop-performance"

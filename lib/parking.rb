@@ -3,6 +3,8 @@
 require "active_support/all"
 require "zeitwerk"
 
+require "mittsu"
+
 require "byebug" if ENV["ENV"] == "development"
 
 module Parking

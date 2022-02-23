@@ -2,14 +2,23 @@
 
 ![Continuous Integration](https://github.com/floriandejonckheere/parking/workflows/Continuous%20Integration/badge.svg)
 
-Parking project
+Self-parking car.
 
 ## Installation
 
+Install the prerequisites:
+
+```sh
+# OSX
+$ brew install glfw3
+
+# Ubuntu
+$ sudo apt-get install libglfw3
+```
 Clone the repository, and install the dependencies:
 
 ```sh
-bundle
+$ bundle
 ```
 
 ## Usage
