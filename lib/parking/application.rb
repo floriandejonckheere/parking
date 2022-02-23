@@ -32,17 +32,9 @@ module Parking
     end
 
     def load_resources
-      @car = loader.load(Parking.root.join("res/car.obj"), "car.mtl")
+      @car = Car.new
 
-      car.receive_shadow = true
-      car.cast_shadow = true
-
-      car.traverse do |child|
-        child.receive_shadow = true
-        child.cast_shadow = true
-      end
-
-      scene.add(car)
+      scene.add(car.object)
       scene.print_tree
     end
 
@@ -103,10 +95,6 @@ module Parking
 
     def camera
       @camera ||= Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0)
-    end
-
-    def loader
-      @loader ||= Mittsu::OBJMTLLoader.new
     end
   end
 end
