@@ -5,17 +5,17 @@ module Parking
     # Speed modifier
     SPEED = 0.1
 
-    def drive(rotation)
-      [
-        Math.cos(rotation) * SPEED,
-        Math.sin(rotation) * SPEED,
-      ]
+    # Rotation modifier (car facing left or right)
+    attr_reader :ry
+
+    def initialize(ry)
+      @ry = ry
     end
 
-    def reverse(rotation)
+    def drive(rotation)
       [
-        Math.cos(rotation) * SPEED,
-        Math.sin(rotation) * SPEED,
+        Math.cos(rotation - ry) * SPEED,
+        Math.sin(rotation - ry) * SPEED,
       ]
     end
   end

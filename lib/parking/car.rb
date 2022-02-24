@@ -6,7 +6,7 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :direction, :engine, :steering_wheel
+    attr_reader :engine, :steering_wheel
 
     def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
@@ -16,12 +16,12 @@ module Parking
 
       position.y = 0.75 if Parking.options.fiat?
 
-      # Set steering wheel
-      @steering_wheel = SteeringWheel.new
-      @engine = Engine.new
-
       # Rotate to correct orientation
-      @direction = rotation.y = direction * (Math::PI / 2)
+      rotation.y = (direction * (Math::PI / 2))
+
+      # Initialize car parts
+      @steering_wheel = SteeringWheel.new
+      @engine = Engine.new(rotation.y)
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
@@ -31,7 +31,7 @@ module Parking
     end
 
     def drive
-      dx, dz = engine.drive(rotation.y - direction)
+      dx, dz = engine.drive(rotation.y)
 
       position.x += dx
       position.z -= dz
@@ -40,7 +40,7 @@ module Parking
     end
 
     def reverse
-      dx, dz = engine.drive(rotation.y - direction)
+      dx, dz = engine.drive(rotation.y)
 
       position.x -= dx
       position.z += dz
