@@ -2,14 +2,11 @@
 
 module Parking
   class Car < SimpleDelegator
-    # Speed modifier
-    SPEED = 0.1
-
     # Facing left/right
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :direction, :steering_wheel
+    attr_reader :direction, :engine, :steering_wheel
 
     def initialize(color: [0.8, 0.8, 0.8], direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
@@ -21,6 +18,7 @@ module Parking
 
       # Set steering wheel
       @steering_wheel = SteeringWheel.new
+      @engine = Engine.new
 
       # Rotate to correct orientation
       @direction = rotation.y = direction * (Math::PI / 2)
@@ -33,15 +31,19 @@ module Parking
     end
 
     def drive
-      position.x += Math.cos(rotation.y - direction) * SPEED
-      position.z -= Math.sin(rotation.y - direction) * SPEED
+      dx, dz = engine.drive(rotation.y - direction)
+
+      position.x += dx
+      position.z -= dz
 
       rotation.y += steering_wheel.direction
     end
 
     def reverse
-      position.x -= Math.cos(rotation.y - direction) * SPEED
-      position.z += Math.sin(rotation.y - direction) * SPEED
+      dx, dz = engine.drive(rotation.y - direction)
+
+      position.x -= dx
+      position.z += dz
 
       rotation.y += steering_wheel.direction
     end
