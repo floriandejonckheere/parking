@@ -32,14 +32,14 @@ module Parking
       end
     end
 
-    def forward
+    def drive
       position.x += Math.cos(rotation.y - direction) * SPEED
       position.z -= Math.sin(rotation.y - direction) * SPEED
 
       rotation.y += steering_wheel.direction
     end
 
-    def backward
+    def reverse
       position.x -= Math.cos(rotation.y - direction) * SPEED
       position.z += Math.sin(rotation.y - direction) * SPEED
 

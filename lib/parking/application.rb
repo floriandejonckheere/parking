@@ -76,8 +76,8 @@ module Parking
           car.steering_wheel.straight
         end
 
-        car.forward if renderer.window.key_down?(GLFW_KEY_UP)
-        car.backward if renderer.window.key_down?(GLFW_KEY_DOWN)
+        car.drive if renderer.window.key_down?(GLFW_KEY_UP)
+        car.reverse if renderer.window.key_down?(GLFW_KEY_DOWN)
       end
     end
 
