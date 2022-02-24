@@ -8,7 +8,7 @@ module Parking
 
     attr_reader :engine, :steering_wheel
 
-    def initialize(color: [0.6, 0.6, 0.6], direction: RIGHT)
+    def initialize(color: Colors::GREY, direction: RIGHT)
       super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
 
       self.receive_shadow = true

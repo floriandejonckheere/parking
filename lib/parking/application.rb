@@ -82,7 +82,7 @@ module Parking
     end
 
     def car
-      @car ||= Car.new(color: [1.0, 0.0, 0.0])
+      @car ||= Car.new(color: Colors::RED)
     end
 
     def parked_cars
