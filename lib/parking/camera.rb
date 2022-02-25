@@ -20,6 +20,7 @@ module Parking
     def zoom_out = position.y -= SPEED
 
     def sideways
+      position.x = 0.0
       position.z = 4.5
       position.y = 5
 
@@ -27,7 +28,8 @@ module Parking
     end
 
     def top_down
-      position.z = -4.5
+      position.x = 0.0
+      position.z = 0.0
       position.y = 10.0
 
       rotation.x = -Math::PI / 2

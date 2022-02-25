@@ -3,7 +3,7 @@
 module Parking
   class Engine
     # Speed modifier
-    SPEED = 0.1
+    SPEED = 0.05
 
     # Rotation modifier (car facing left or right)
     attr_reader :ry
