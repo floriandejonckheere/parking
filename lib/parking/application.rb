@@ -5,6 +5,15 @@ module Parking
     X_AXIS = Mittsu::Vector3.new(1.0, 0.0, 0.0)
     Y_AXIS = Mittsu::Vector3.new(0.0, 1.0, 0.0)
 
+    # Damage modifier
+    DAMAGE = 0.1
+
+    attr_reader :damage
+
+    def initialize
+      @damage = 0.0
+    end
+
     def start
       # Add cars
       parked_cars.each do |car|
@@ -76,13 +85,21 @@ module Parking
       renderer.window.run do
         renderer.render(scene, camera)
 
-        parked_cars.each do |parked_car|
-          if car.collides?(parked_car)
+        collisions = parked_cars.filter_map do |parked_car|
+          collision = car.collides?(parked_car)
+
+          if collision
             parked_car.bounding_box.color = Colors::RED
           else
             parked_car.bounding_box.color = Colors::GREEN
           end
+
+          parked_car if collision
         end
+
+        @damage += (collisions.count * DAMAGE)
+
+        puts "Position (#{car.score.truncate(2)}) - damage (#{damage.truncate(2)}) = score (#{(car.score - damage).truncate(2)})"
 
         # Steer
         if renderer.window.key_down?(GLFW_KEY_D)
