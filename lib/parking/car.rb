@@ -9,12 +9,13 @@ module Parking
     attr_reader :engine, :steering_wheel
 
     def initialize(color: Colors::GREY, direction: RIGHT)
-      super(loader.load(Parking.root.join("res/#{name}.obj"), "#{name}.mtl"))
+      super(model)
 
       self.receive_shadow = true
       self.cast_shadow = true
 
-      position.y = 0.75 if Parking.options.fiat?
+      # Set to correct height
+      position.y = meta[:offset]
 
       # Rotate to correct orientation
       rotation.y = (direction * (Math::PI / 2))
@@ -52,8 +53,14 @@ module Parking
 
     private
 
-    def name
-      Parking.options.fiat? ? :fiat : :car
+    def model
+      loader.load(Parking.root.join("res/#{Parking.options.model}.obj"), "#{Parking.options.model}.mtl")
+    end
+
+    def meta
+      YAML
+        .load_file(Parking.root.join("res/#{Parking.options.model}.yml").to_s)
+        .symbolize_keys
     end
 
     def loader

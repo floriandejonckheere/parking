@@ -12,7 +12,7 @@ module Parking
         o.on("Global options:")
         o.on("-w", "--width=WIDTH", Integer, "Screen width")
         o.on("-H", "--height=WIDTH", Integer, "Screen height")
-        o.on("-f", "--fiat", "Use Fiat 500 model")
+        o.on("-m", "--model=MODEL", "Car model (default 'car')")
         o.on("-v", "--verbose", "Turn on verbose logging")
         o.on("-D", "--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
