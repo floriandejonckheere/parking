@@ -87,19 +87,19 @@ module Parking
 
     def parked_cars
       [
-        { x: -12.0, z: -6.0, d: Car::LEFT },
-        { x: -6.0, z: -6.0, d: Car::LEFT },
+        { x: -2.0, z: -6.0, d: Car::LEFT },
+        { x: -1.0, z: -6.0, d: Car::LEFT },
         { x: 0.0, z: -6.0, d: Car::LEFT },
-        { x: 6.0, z: -6.0, d: Car::LEFT },
-        { x: 12.0, z: -6.0, d: Car::LEFT },
+        { x: 1.0, z: -6.0, d: Car::LEFT },
+        { x: 2.0, z: -6.0, d: Car::LEFT },
 
-        { x: -12.0, z: 3.0 },
-        { x: -6.0, z: 3.0 },
-        { x: 6.0, z: 3.0 },
-        { x: 12.0, z: 3.0 },
+        { x: -2.0, z: 3.0 },
+        { x: -1.0, z: 3.0 },
+        { x: 1.0, z: 3.0 },
+        { x: 2.0, z: 3.0 },
       ].map do |coords|
         Car.new(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
-          car.position.x = coords[:x]
+          car.position.x = coords[:x] * car.length
           car.position.z = coords[:z]
         end
       end

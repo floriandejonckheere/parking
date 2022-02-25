@@ -6,7 +6,7 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
-    attr_reader :engine, :steering_wheel
+    attr_reader :length, :engine, :steering_wheel
 
     def initialize(color: Colors::GREY, direction: RIGHT)
       super(model)
@@ -23,6 +23,8 @@ module Parking
       # Initialize car parts
       @steering_wheel = SteeringWheel.new
       @engine = Engine.new(rotation.y)
+
+      @length = meta[:length]
 
       traverse do |child|
         child.material.color = color if child.name == "Car_Cube Body"
