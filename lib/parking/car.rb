@@ -10,6 +10,9 @@ module Parking
     # Coasting modifier
     COAST = 0.04
 
+    # Brake modifier
+    BRAKE = 0.1
+
     MIN_SPEED = -2.0
     MAX_SPEED = 4.0
 
@@ -66,7 +69,16 @@ module Parking
 
       # Extract sign from speed modifier
       sign = (speed <=> 0)
+      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + (steering_wheel.direction * sign))
+    end
 
+    def brake
+      dx, dz = engine.drive(rotation.y)
+
+      @speed = speed.negative? ? [speed + BRAKE, 0.0].min : [speed - BRAKE, 0.0].max
+
+      # Extract sign from speed modifier
+      sign = (speed <=> 0)
       move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + (steering_wheel.direction * sign))
     end
 

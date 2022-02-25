@@ -33,6 +33,7 @@ Click and drag to look around, scroll to zoom.
 | Key          | Function                        |
 |--------------|---------------------------------|
 | WASD         | Car drive/reverse left/right    |
+| Space        | Brake                           |
 | Arrow keys   | Camera forward/backward up/down |
 | +/- (or =/-) | Camera up/down                  |
 | PgUp         | Top-down view                   |
