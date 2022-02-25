@@ -67,10 +67,7 @@ module Parking
     end
 
     def bounding_box
-      @bounding_box ||= Mittsu::Mesh.new(
-        Mittsu::BoxGeometry.new(2.4, 3.0, 4.5),
-        Mittsu::MeshBasicMaterial.new(color: 0xff0000, wireframe: true),
-      )
+      @bounding_box ||= BoundingBox.new
     end
 
     delegate :is_a?, to: :__getobj__
