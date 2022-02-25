@@ -75,6 +75,14 @@ module Parking
       renderer.window.run do
         renderer.render(scene, camera)
 
+        parked_cars.each do |parked_car|
+          if car.collides?(parked_car)
+            parked_car.bounding_box.color = Colors::RED
+          else
+            parked_car.bounding_box.color = Colors::GREEN
+          end
+        end
+
         if renderer.window.key_down?(GLFW_KEY_RIGHT)
           car.steering_wheel.right
         elsif renderer.window.key_down?(GLFW_KEY_LEFT)
@@ -95,7 +103,7 @@ module Parking
     end
 
     def parked_cars
-      [
+      @parked_cars ||= [
         { x: -2.0, z: -9.0, d: Car::LEFT },
         { x: -1.0, z: -9.0, d: Car::LEFT },
         { x: 0.0, z: -9.0, d: Car::LEFT },

@@ -52,14 +52,16 @@ module Parking
       move(position.x - dx, position.z + dz, rotation.y - steering_wheel.direction)
     end
 
-    def move(x, z, ry = nil)
+    def move(x, z, ry = rotation.y)
       position.set(x, position.y, z)
-      bounding_box.position.set(x, position.y, z)
-
-      return unless ry
-
       rotation.y = ry
+
+      bounding_box.position.set(x, position.y, z)
       bounding_box.rotation.y = ry
+    end
+
+    def collides?(car)
+      bounding_box.collides?(car.bounding_box)
     end
 
     def score
