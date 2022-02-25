@@ -4,20 +4,8 @@ module Parking
   class Car < SimpleDelegator
     include CarLoader
 
-    # Acceleration/deceleration modifier
-    ACCELERATION = 0.1
-
-    # Coasting modifier
-    COAST = 0.04
-
-    # Brake modifier
-    BRAKE = 0.15
-
     # Steering damping modifier
     STEERING = 0.3
-
-    MIN_SPEED = -2.0
-    MAX_SPEED = 4.0
 
     # Facing left/right
     LEFT = -1.0
@@ -26,13 +14,12 @@ module Parking
     # Scoring distance of parking position
     DISTANCE = 10.0
 
-    attr_reader :meta, :speed, :engine, :steering_wheel
+    attr_reader :meta, :engine, :steering_wheel
 
     def initialize(model, meta)
       super(model)
 
       @meta = meta
-      @speed = 0.0
 
       self.receive_shadow = true
       self.cast_shadow = true
@@ -56,34 +43,13 @@ module Parking
       end
     end
 
-    def drive(accelerate: false, decelerate: false)
-      dx, dz = engine.drive(rotation.y)
-
-      if accelerate
-        # Driver pressed accelerator
-        @speed = [speed + ACCELERATION, MAX_SPEED].min
-      elsif decelerate
-        # Driver pressed brake
-        @speed = [speed - ACCELERATION, MIN_SPEED].max
-      else
-        # Car is coasting
-        @speed = speed.negative? ? [speed + COAST, 0.0].min : [speed - COAST, 0.0].max
-      end
+    def drive(accelerate: false, decelerate: false, brake: false)
+      dx, dz = engine.drive(rotation.y, accelerate:, decelerate:, brake:)
 
       # Dampen steering
-      steering = steering_wheel.direction * speed * STEERING
+      steering = steering_wheel.direction * engine.speed * STEERING
 
-      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + steering)
-    end
-
-    def brake
-      dx, dz = engine.drive(rotation.y)
-
-      @speed = speed.negative? ? [speed + BRAKE, 0.0].min : [speed - BRAKE, 0.0].max
-
-      steering = steering_wheel.direction * speed * STEERING
-
-      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + steering)
+      move(position.x + dx, position.z - dz, rotation.y + steering)
     end
 
     def move(x, z, ry = rotation.y)

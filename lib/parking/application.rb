@@ -122,11 +122,10 @@ module Parking
         end
 
         # Drive
-        next car.brake if renderer.window.key_down?(GLFW_KEY_SPACE)
-
         car.drive(
           accelerate: renderer.window.key_down?(GLFW_KEY_W),
           decelerate: renderer.window.key_down?(GLFW_KEY_S),
+          brake: renderer.window.key_down?(GLFW_KEY_SPACE),
         )
       end
     end
