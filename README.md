@@ -23,7 +23,21 @@ $ bundle
 
 ## Usage
 
-Execute `bin/parking --help` to see all available commands and their arguments.
+Run `bin/parking` to start the simulation.
+Run `bin/parking --help` to see all available commands and their arguments.
+
+## Controls
+
+Click and drag to look around, scroll to zoom.
+
+| Key          | Function                        |
+|--------------|---------------------------------|
+| WASD         | Car drive/reverse left/right    |
+| Arrow keys   | Camera forward/backward up/down |
+| +/- (or =/-) | Camera up/down                  |
+| PgUp         | Top-down view                   |
+| PgDn         | Sideways view                   |
+| Q            | Quit application                |
 
 ## Contributing
 

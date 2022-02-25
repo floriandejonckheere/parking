@@ -83,16 +83,27 @@ module Parking
           end
         end
 
-        if renderer.window.key_down?(GLFW_KEY_RIGHT)
+        # Steer
+        if renderer.window.key_down?(GLFW_KEY_D)
           car.steering_wheel.right
-        elsif renderer.window.key_down?(GLFW_KEY_LEFT)
+        elsif renderer.window.key_down?(GLFW_KEY_A)
           car.steering_wheel.left
         else
           car.steering_wheel.straight
         end
 
-        car.drive if renderer.window.key_down?(GLFW_KEY_UP)
-        car.reverse if renderer.window.key_down?(GLFW_KEY_DOWN)
+        # Drive/reverse
+        car.drive if renderer.window.key_down?(GLFW_KEY_W)
+        car.reverse if renderer.window.key_down?(GLFW_KEY_S)
+
+        # Move camera
+        camera.up if renderer.window.key_down?(GLFW_KEY_UP)
+        camera.down if renderer.window.key_down?(GLFW_KEY_DOWN)
+        camera.left if renderer.window.key_down?(GLFW_KEY_LEFT)
+        camera.right if renderer.window.key_down?(GLFW_KEY_RIGHT)
+
+        camera.zoom_in if renderer.window.key_down?(GLFW_KEY_EQUAL)
+        camera.zoom_out if renderer.window.key_down?(GLFW_KEY_MINUS)
       end
     end
 

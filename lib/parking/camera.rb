@@ -2,11 +2,22 @@
 
 module Parking
   class Camera < SimpleDelegator
+    # Speed modifier
+    SPEED = 0.1
+
     def initialize
       super(Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0))
 
       sideways
     end
+
+    def up = position.z -= SPEED
+    def down = position.z += SPEED
+    def left = position.x -= SPEED
+    def right = position.x += SPEED
+
+    def zoom_in = position.y += SPEED
+    def zoom_out = position.y -= SPEED
 
     def sideways
       position.z = 4.5
@@ -16,7 +27,7 @@ module Parking
     end
 
     def top_down
-      position.z = -1.5
+      position.z = -4.5
       position.y = 10.0
 
       rotation.x = -Math::PI / 2
