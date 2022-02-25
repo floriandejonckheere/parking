@@ -19,6 +19,7 @@ module Parking
 
       # Add floor
       scene.add(floor)
+      scene.add(target)
 
       # Add lights
       scene.add(ambient_light)
@@ -139,6 +140,16 @@ module Parking
       ).tap do |floor|
         floor.position.y = -0.5
         floor.receive_shadow = true
+      end
+    end
+
+    def target
+      Mittsu::Mesh.new(
+        Mittsu::BoxGeometry.new(BoundingBox::WIDTH, 0.01, BoundingBox::LENGTH),
+        Mittsu::MeshBasicMaterial.new(color: 0x006cb3),
+      ).tap do |target|
+        target.rotation.y = Math::PI / 2
+        target.receive_shadow = true
       end
     end
 

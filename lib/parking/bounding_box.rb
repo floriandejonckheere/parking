@@ -3,7 +3,7 @@
 module Parking
   class BoundingBox < SimpleDelegator
     WIDTH = 2.1
-    LENGTH = 4.4
+    LENGTH = 4.5
     HEIGHT = 3.0
 
     def initialize
