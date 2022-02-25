@@ -99,7 +99,7 @@ module Parking
 
         @damage += (collisions.count * DAMAGE)
 
-        puts "Position (#{car.score.truncate(2)}) - damage (#{damage.truncate(2)}) = score (#{(car.score - damage).truncate(2)})"
+        # puts "Position (#{car.score.truncate(2)}) - damage (#{damage.truncate(2)}) = score (#{(car.score - damage).truncate(2)})"
 
         # Move camera
         camera.up if renderer.window.key_down?(GLFW_KEY_UP)
@@ -122,8 +122,10 @@ module Parking
         end
 
         # Drive/reverse
-        car.drive if renderer.window.key_down?(GLFW_KEY_W)
-        car.reverse if renderer.window.key_down?(GLFW_KEY_S)
+        car.drive(
+          accelerate: renderer.window.key_down?(GLFW_KEY_W),
+          decelerate: renderer.window.key_down?(GLFW_KEY_S),
+        )
       end
     end
 
