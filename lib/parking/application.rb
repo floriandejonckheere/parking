@@ -135,7 +135,7 @@ module Parking
     def floor
       Mittsu::Mesh.new(
         Mittsu::BoxGeometry.new(1000.0, 1.0, 1000.0),
-        Mittsu::MeshPhongMaterial.new(color: 0xffffff),
+        Mittsu::MeshPhongMaterial.new(color: 0x848484),
       ).tap do |floor|
         floor.position.y = -0.5
         floor.receive_shadow = true
