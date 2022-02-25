@@ -106,11 +106,7 @@ module Parking
         { x: 2.0, z: 3.0 },
       ].map do |coords|
         Car.load(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
-          car.position.x = coords[:x] * car.meta.length
-          car.position.z = coords[:z]
-
-          car.bounding_box.position.x = car.position.x
-          car.bounding_box.position.z = car.position.z
+          car.move(coords[:x] * car.meta.length, coords[:z])
         end
       end
     end

@@ -40,29 +40,23 @@ module Parking
     def drive
       dx, dz = engine.drive(rotation.y)
 
-      position.x += dx
-      position.z -= dz
-
-      bounding_box.position.x = position.x
-      bounding_box.position.z = position.z
-
-      rotation.y += steering_wheel.direction
-
-      bounding_box.rotation.y = rotation.y
+      move(position.x + dx, position.z - dz, rotation.y + steering_wheel.direction)
     end
 
     def reverse
       dx, dz = engine.drive(rotation.y)
 
-      position.x -= dx
-      position.z += dz
+      move(position.x - dx, position.z + dz, rotation.y - steering_wheel.direction)
+    end
 
-      bounding_box.position.x = position.x
-      bounding_box.position.z = position.z
+    def move(x, z, ry = nil)
+      position.set(x, position.y, z)
+      bounding_box.position.set(x, position.y, z)
 
-      rotation.y -= steering_wheel.direction
+      return unless ry
 
-      bounding_box.rotation.y = rotation.y
+      rotation.y = ry
+      bounding_box.rotation.y = ry
     end
 
     def bounding_box
