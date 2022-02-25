@@ -47,7 +47,7 @@ module Parking
       dx, dz = engine.drive(rotation.y, accelerate:, decelerate:, brake:)
 
       # Dampen steering
-      steering = steering_wheel.direction * engine.speed * STEERING
+      steering = steering_wheel.steering * engine.speed * STEERING
 
       move(position.x + dx, position.z - dz, rotation.y + steering)
     end
