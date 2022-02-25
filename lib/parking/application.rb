@@ -62,6 +62,8 @@ module Parking
           camera_container.top_down
         when GLFW_KEY_PAGE_DOWN
           camera_container.sideways
+        when GLFW_KEY_Q
+          exit
         end
       end
 
