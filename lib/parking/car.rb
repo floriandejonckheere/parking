@@ -11,7 +11,10 @@ module Parking
     COAST = 0.04
 
     # Brake modifier
-    BRAKE = 0.1
+    BRAKE = 0.15
+
+    # Steering damping modifier
+    STEERING = 0.3
 
     MIN_SPEED = -2.0
     MAX_SPEED = 4.0
@@ -67,9 +70,10 @@ module Parking
         @speed = speed.negative? ? [speed + COAST, 0.0].min : [speed - COAST, 0.0].max
       end
 
-      # Extract sign from speed modifier
-      sign = (speed <=> 0)
-      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + (steering_wheel.direction * sign))
+      # Dampen steering
+      steering = steering_wheel.direction * speed * STEERING
+
+      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + steering)
     end
 
     def brake
@@ -77,9 +81,9 @@ module Parking
 
       @speed = speed.negative? ? [speed + BRAKE, 0.0].min : [speed - BRAKE, 0.0].max
 
-      # Extract sign from speed modifier
-      sign = (speed <=> 0)
-      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + (steering_wheel.direction * sign))
+      steering = steering_wheel.direction * speed * STEERING
+
+      move(position.x + (dx * speed), position.z - (dz * speed), rotation.y + steering)
     end
 
     def move(x, z, ry = rotation.y)
