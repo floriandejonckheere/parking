@@ -29,7 +29,7 @@ module Parking
       @engine = Engine.new(rotation.y)
 
       traverse do |child|
-        child.material.color = meta.color if child.name == "Car_Cube Body"
+        child.material.color = meta.color if child.name == meta.body
         child.receive_shadow = true
         child.cast_shadow = true
       end
