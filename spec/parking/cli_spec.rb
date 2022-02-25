@@ -12,7 +12,7 @@ describe Parking::CLI do
       it "turns on verbose output" do
         cli
 
-        expect(parking.options).to be_verbose
+        expect(Parking.options).to be_verbose
       end
     end
 
@@ -22,7 +22,7 @@ describe Parking::CLI do
       it "turns on debug output" do
         cli
 
-        expect(parking.options).to be_debug
+        expect(Parking.options).to be_debug
       end
     end
 
@@ -31,16 +31,6 @@ describe Parking::CLI do
 
       it "prints usage and exits" do
         expect { expect { cli }.to raise_error Parking::ExitError }.to log "[global options]"
-      end
-    end
-  end
-
-  describe "#start" do
-    context "when no command is given" do
-      let(:args) { [] }
-
-      it "prints usage and exits" do
-        expect { expect { cli.start }.to raise_error Parking::ExitError }.to log "[global options]"
       end
     end
   end
