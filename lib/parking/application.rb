@@ -89,21 +89,23 @@ module Parking
     end
 
     def car
-      @car ||= Car.load(color: Colors::RED)
+      @car ||= Car.load(color: Colors::RED).tap do |car|
+        car.move(0.0, -3.0)
+      end
     end
 
     def parked_cars
       [
-        { x: -2.0, z: -6.0, d: Car::LEFT },
-        { x: -1.0, z: -6.0, d: Car::LEFT },
-        { x: 0.0, z: -6.0, d: Car::LEFT },
-        { x: 1.0, z: -6.0, d: Car::LEFT },
-        { x: 2.0, z: -6.0, d: Car::LEFT },
+        { x: -2.0, z: -9.0, d: Car::LEFT },
+        { x: -1.0, z: -9.0, d: Car::LEFT },
+        { x: 0.0, z: -9.0, d: Car::LEFT },
+        { x: 1.0, z: -9.0, d: Car::LEFT },
+        { x: 2.0, z: -9.0, d: Car::LEFT },
 
-        { x: -2.0, z: 3.0 },
-        { x: -1.0, z: 3.0 },
-        { x: 1.0, z: 3.0 },
-        { x: 2.0, z: 3.0 },
+        { x: -2.0, z: 0.0 },
+        { x: -1.0, z: 0.0 },
+        { x: 1.0, z: 0.0 },
+        { x: 2.0, z: 0.0 },
       ].map do |coords|
         Car.load(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
           car.move(coords[:x] * car.meta.length, coords[:z])

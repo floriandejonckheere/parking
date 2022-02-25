@@ -8,6 +8,9 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
+    # Scoring distance of parking position
+    DISTANCE = 10.0
+
     attr_reader :meta, :engine, :steering_wheel
 
     def initialize(model, meta)
@@ -57,6 +60,10 @@ module Parking
 
       rotation.y = ry
       bounding_box.rotation.y = ry
+    end
+
+    def score
+      (DISTANCE - Math.sqrt((position.x**2) + (position.z**2))).abs
     end
 
     def bounding_box
