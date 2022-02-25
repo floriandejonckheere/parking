@@ -2,7 +2,7 @@
 
 ![Continuous Integration](https://github.com/floriandejonckheere/parking/workflows/Continuous%20Integration/badge.svg)
 
-Self-parking car.
+Self-parking car simulation.
 
 ## Installation
 
@@ -24,6 +24,7 @@ $ bundle
 ## Usage
 
 Run `bin/parking` to start the simulation.
+Run `bin/parking --debug` to render the bounding boxes.
 Run `bin/parking --help` to see all available commands and their arguments.
 
 ## Controls

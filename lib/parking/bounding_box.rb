@@ -39,7 +39,7 @@ module Parking
     def mesh
       @mesh ||= Mittsu::Mesh.new(
         geometry,
-        Mittsu::MeshBasicMaterial.new(color: 0x00ff00, wireframe: true),
+        Mittsu::MeshBasicMaterial.new(color: 0x00ff00, wireframe: true, transparent: !Parking.options.debug?, opacity: Parking.options.debug? ? 1.0 : 0.0),
       )
     end
 
