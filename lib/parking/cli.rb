@@ -13,6 +13,7 @@ module Parking
         o.on("-w", "--width=WIDTH", Integer, "Screen width")
         o.on("-H", "--height=WIDTH", Integer, "Screen height")
         o.on("-m", "--model=MODEL", "Car model (default 'car')")
+        o.on("-a", "--automatic", "Park automatically")
         o.on("-v", "--verbose", "Turn on verbose logging")
         o.on("-D", "--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }

@@ -4,7 +4,7 @@ module Parking
   class Options
     attr_accessor :help
 
-    attr_writer :width, :height, :fiat, :model
+    attr_writer :width, :height, :fiat, :model, :automatic
 
     def width
       @width ||= 1280
@@ -20,6 +20,14 @@ module Parking
 
     def model
       @model ||= "car"
+    end
+
+    def automatic
+      @automatic ||= false
+    end
+
+    def automatic?
+      @automatic.present?
     end
 
     def verbose=(value)
