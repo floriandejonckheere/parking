@@ -48,7 +48,7 @@ module Parking
       position.x -= dx
       position.z += dz
 
-      rotation.y += steering_wheel.direction
+      rotation.y -= steering_wheel.direction
     end
 
     delegate :is_a?, to: :__getobj__
