@@ -84,7 +84,7 @@ module Parking
     end
 
     def car
-      @car ||= Car.new(color: Colors::RED)
+      @car ||= Car.load(color: Colors::RED)
     end
 
     def parked_cars
@@ -100,8 +100,8 @@ module Parking
         { x: 1.0, z: 3.0 },
         { x: 2.0, z: 3.0 },
       ].map do |coords|
-        Car.new(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
-          car.position.x = coords[:x] * car.length
+        Car.load(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
+          car.position.x = coords[:x] * car.meta.length
           car.position.z = coords[:z]
         end
       end
