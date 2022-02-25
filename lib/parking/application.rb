@@ -7,8 +7,13 @@ module Parking
 
     def start
       # Add cars
-      parked_cars.each { |car| scene.add(car) }
+      parked_cars.each do |car|
+        scene.add(car)
+        scene.add(car.bounding_box)
+      end
+
       scene.add(car)
+      scene.add(car.bounding_box)
 
       scene.print_tree
 
@@ -103,6 +108,9 @@ module Parking
         Car.load(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
           car.position.x = coords[:x] * car.meta.length
           car.position.z = coords[:z]
+
+          car.bounding_box.position.x = car.position.x
+          car.bounding_box.position.z = car.position.z
         end
       end
     end
