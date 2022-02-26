@@ -134,7 +134,7 @@ module Parking
     end
 
     def algorithm
-      @algorithm ||= Algorithms::Simple.new
+      @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new
     end
 
     def parked_cars
