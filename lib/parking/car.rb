@@ -4,9 +4,6 @@ module Parking
   class Car < SimpleDelegator
     include CarLoader
 
-    # Steering damping modifier
-    STEERING = 0.3
-
     # Facing left/right
     LEFT = -1.0
     RIGHT = 1.0
@@ -46,10 +43,9 @@ module Parking
     def drive(accelerate: false, decelerate: false, brake: false)
       dx, dz = engine.drive(rotation.y, accelerate:, decelerate:, brake:)
 
-      # Dampen steering
-      steering = steering_wheel.steering * engine.speed * STEERING
+      dy = steering_wheel.turn(engine.speed)
 
-      move(position.x + dx, position.z - dz, rotation.y + steering)
+      move(position.x + dx, position.z - dz, rotation.y + dy)
     end
 
     def move(x, z, ry = rotation.y)
