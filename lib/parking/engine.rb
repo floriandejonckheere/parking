@@ -3,7 +3,7 @@
 module Parking
   class Engine
     # Speed modifier
-    SPEED = 0.1
+    SPEED = 0.05
 
     MIN_SPEED = -2.0
     MAX_SPEED = 4.0
