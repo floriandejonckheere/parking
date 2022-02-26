@@ -11,8 +11,9 @@ module Parking
     # Coasting modifier
     COAST = 0.002
 
-    # Minimum damping factor
+    # Damping factor
     MIN_DAMPING = 0.2
+    MAX_DAMPING = 0.8
 
     attr_reader :steering
 
@@ -35,9 +36,10 @@ module Parking
 
     def turn(speed)
       # Dampen steering, so steering is more intense at lower speeds
-      # Damping factor is 1.0 when (relative) speed forwards or
-      # in reverse is 100%, and MIN_DAMPING when speed is 0%
-      damping_factor = [1 - (speed.negative? ? (speed / Engine::MIN_SPEED) : (speed / Engine::MAX_SPEED)), MIN_DAMPING].max
+      # Damping factor is 0.8 when (relative) speed forwards or
+      # in reverse is 100%, and 0.2 when speed is 0%
+      damping_factor = 1 - (speed.negative? ? (speed / Engine::MIN_SPEED) : (speed / Engine::MAX_SPEED))
+      damping_factor = [[damping_factor, MIN_DAMPING].max, MAX_DAMPING].min
 
       steering * speed * damping_factor
     end
