@@ -14,13 +14,10 @@ module Parking
 
     def start
       # Add cars
-      parked_cars.each do |car|
-        scene.add(car)
-      end
-
+      parked_cars.each { |car| scene.add(car) }
       scene.add(car)
 
-      scene.print_tree
+      scene.print_tree if Parking.options.debug?
 
       # Add floor
       scene.add(floor)
@@ -117,34 +114,15 @@ module Parking
       end
     end
 
-    def car
-      @car ||= Car.load(color: Colors::RED).tap do |car|
-        car.move(0.0, -3.0)
-      end
-    end
-
     def algorithm
       @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new
     end
 
-    def parked_cars
-      @parked_cars ||= [
-        { x: -2.0, z: -9.0, d: Car::LEFT },
-        { x: -1.0, z: -9.0, d: Car::LEFT },
-        { x: 0.0, z: -9.0, d: Car::LEFT },
-        { x: 1.0, z: -9.0, d: Car::LEFT },
-        { x: 2.0, z: -9.0, d: Car::LEFT },
-
-        { x: -2.0, z: 0.0 },
-        { x: -1.0, z: 0.0 },
-        { x: 1.0, z: 0.0 },
-        { x: 2.0, z: 0.0 },
-      ].map do |coords|
-        Car.load(direction: coords.fetch(:d, Car::RIGHT)).tap do |car|
-          car.move(coords[:x] * car.meta.length, coords[:z])
-        end
-      end
+    def layout
+      @layout ||= Layout.new
     end
+
+    delegate :car, :parked_cars, to: :layout
 
     def floor
       Mittsu::Mesh.new(
