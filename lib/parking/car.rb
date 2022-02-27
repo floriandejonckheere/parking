@@ -21,9 +21,6 @@ module Parking
 
       @meta = meta
 
-      self.receive_shadow = true
-      self.cast_shadow = true
-
       # Set to correct height
       position.y = meta.offset
       bounding_box.position.y = position.y
@@ -37,12 +34,6 @@ module Parking
       @engine = Engine.new(rotation.y)
 
       @damage = 0.0
-
-      traverse do |child|
-        child.material.color = meta.color if child.name == meta.body
-        child.receive_shadow = true
-        child.cast_shadow = true
-      end
     end
 
     def drive(accelerate: false, decelerate: false, brake: false)

@@ -14,7 +14,16 @@ module Parking
         meta.color = color
         meta.direction = direction
 
-        new(model, meta)
+        new(model, meta).tap do |car|
+          car.receive_shadow = true
+          car.cast_shadow = true
+
+          car.traverse do |child|
+            child.material.color = meta.color if child.name == meta.body
+            child.receive_shadow = true
+            child.cast_shadow = true
+          end
+        end
       end
 
       private
