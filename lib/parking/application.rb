@@ -97,7 +97,7 @@ module Parking
         camera.zoom_in if renderer.window.key_down?(GLFW_KEY_EQUAL)
         camera.zoom_out if renderer.window.key_down?(GLFW_KEY_MINUS)
 
-        next algorithm.run if Parking.options.automatic?
+        next algorithm.run(car) if Parking.options.automatic?
 
         # Steer
         car.steering_wheel.steer(
