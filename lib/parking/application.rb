@@ -101,7 +101,7 @@ module Parking
         camera.zoom_in if renderer.window.key_down?(GLFW_KEY_EQUAL)
         camera.zoom_out if renderer.window.key_down?(GLFW_KEY_MINUS)
 
-        next algorithm.run(car) if Parking.options.automatic?
+        next algorithm.run if Parking.options.automatic?
 
         # Drive
         car.drive(
@@ -115,7 +115,7 @@ module Parking
     end
 
     def algorithm
-      @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new
+      @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new(car, target)
     end
 
     def layout

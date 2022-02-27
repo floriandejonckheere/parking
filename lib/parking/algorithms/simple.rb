@@ -25,7 +25,7 @@ module Parking
         ],
       }.freeze
 
-      def run(car)
+      def run
         action = iterator.next
 
         puts action.keys.join(", ")

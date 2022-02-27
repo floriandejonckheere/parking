@@ -2,12 +2,19 @@
 
 module Parking
   class Algorithm
+    attr_reader :car, :target
+
+    def initialize(car, target)
+      @car = car
+      @target = target
+    end
+
     ##
     # Called on every tick (~ screen refresh rate)
-    # Use the `car` argument to process sensory data
+    # Use `car` and `target` to process sensory data
     # and control the car (using Car#drive)
     #
-    def run(_car)
+    def run
       raise NotImplementedError
     end
 
