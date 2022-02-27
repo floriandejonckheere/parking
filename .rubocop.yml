@@ -43,6 +43,9 @@ Metrics/PerceivedComplexity:
 Naming/MethodParameterName:
   Enabled: false
 
+Performance/TimesMap:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
 
