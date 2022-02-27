@@ -4,8 +4,7 @@
 
 Self-parking car simulation.
 
-![Screenshot](https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif)
-
+<a href="https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif" width="49%" height="auto"></a>
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png" width="49%" height="auto"></a>
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png" width="49%" height="auto"></a>
 
@@ -34,12 +33,12 @@ Run `bin/parking --help` to see all available commands and their arguments.
 
 ## Controls
 
+### Camera
+
 Click and drag to look around, scroll to zoom.
 
 | **Key**                  | **Function**                    |
 |--------------------------|---------------------------------|
-| WASD                     | Car drive/reverse left/right    |
-| Space                    | Brake                           |
 | V                        | Toggle scene/car camera         |
 | Q                        | Quit application                |
 | **Scene camera options** |                                 |
@@ -47,6 +46,20 @@ Click and drag to look around, scroll to zoom.
 | +/- (or =/-)             | Camera up/down                  |
 | PgUp                     | Top-down view (scene camera)    |
 | PgDn                     | Sideways view (scene camera)    |
+
+### Car
+
+The movement of the car is controlled by the algorithm.
+You can run the simulation with manual controls as well:
+
+```
+  bin/parking --manual
+```
+
+| **Key**                  | **Function**                    |
+|--------------------------|---------------------------------|
+| WASD                     | Car drive/reverse left/right    |
+| Space                    | Brake                           |
 
 ## Contributing
 
