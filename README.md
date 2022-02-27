@@ -23,8 +23,7 @@ $ bundle
 
 ## Usage
 
-Run `bin/parking` to start the simulation.
-Run `bin/parking --debug` to render the bounding boxes.
+Run `bin/parking --debug --automatic --algorithm=simple` to start the simulation.
 Run `bin/parking --help` to see all available commands and their arguments.
 
 ## Controls
