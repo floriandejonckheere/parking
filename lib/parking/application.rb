@@ -5,6 +5,13 @@ module Parking
     X_AXIS = Mittsu::Vector3.new(1.0, 0.0, 0.0)
     Y_AXIS = Mittsu::Vector3.new(0.0, 1.0, 0.0)
 
+    # Camera mode (:scene or :car)
+    attr_reader :camera_mode
+
+    def initialize
+      @camera_mode = :scene
+    end
+
     def start
       # Add cars
       parked_cars.each do |car|
@@ -66,13 +73,15 @@ module Parking
           camera_container.top_down
         when GLFW_KEY_PAGE_DOWN
           camera_container.sideways
+        when GLFW_KEY_V
+          @camera_mode = (camera_mode == :scene ? :car : :scene)
         when GLFW_KEY_Q
           exit
         end
       end
 
       renderer.window.run do
-        renderer.render(scene, camera)
+        renderer.render(scene, current_camera)
 
         parked_cars.each do |parked_car|
           collision = car.collides?(parked_car)
@@ -204,6 +213,10 @@ module Parking
 
     def camera_container
       @camera_container ||= Camera::Container.new(camera)
+    end
+
+    def current_camera
+      camera_mode == :scene ? camera : car.camera
     end
 
     def mouse_delta

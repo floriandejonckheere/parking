@@ -31,15 +31,17 @@ Run `bin/parking --help` to see all available commands and their arguments.
 
 Click and drag to look around, scroll to zoom.
 
-| Key          | Function                        |
-|--------------|---------------------------------|
-| WASD         | Car drive/reverse left/right    |
-| Space        | Brake                           |
-| Arrow keys   | Camera forward/backward up/down |
-| +/- (or =/-) | Camera up/down                  |
-| PgUp         | Top-down view                   |
-| PgDn         | Sideways view                   |
-| Q            | Quit application                |
+| **Key**                  | **Function**                    |
+|--------------------------|---------------------------------|
+| WASD                     | Car drive/reverse left/right    |
+| Space                    | Brake                           |
+| V                        | Toggle scene/car camera         |
+| Q                        | Quit application                |
+| **Scene camera options** |                                 |
+| Arrow keys               | Camera forward/backward up/down |
+| +/- (or =/-)             | Camera up/down                  |
+| PgUp                     | Top-down view (scene camera)    |
+| PgDn                     | Sideways view (scene camera)    |
 
 ## Contributing
 

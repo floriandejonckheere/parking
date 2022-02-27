@@ -24,6 +24,7 @@ module Parking
 
       group.add(model)
       group.add(bounding_box)
+      group.add(camera)
 
       super(group)
 
@@ -45,6 +46,9 @@ module Parking
     def move(x, z, ry = rotation.y)
       position.set(x, position.y, z)
       rotation.y = ry
+
+      # Aim camera backwards when reversing
+      camera.rotation.y = (engine.speed.negative? ? 0.0 : Math::PI)
     end
 
     def collide
@@ -75,6 +79,14 @@ module Parking
 
     def engine
       @engine ||= Engine.new(rotation.y)
+    end
+
+    def camera
+      @camera ||= Mittsu::PerspectiveCamera.new(75.0, Parking.options.aspect, 0.1, 1000.0).tap do |camera|
+        # Set initial position
+        camera.position.y = meta.bounding_box.height / 2
+        camera.rotation.y = Math::PI
+      end
     end
   end
 end
