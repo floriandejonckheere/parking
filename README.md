@@ -4,6 +4,10 @@
 
 Self-parking car simulation.
 
+<a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png" width="49%" height="auto"></a>
+<a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png" width="49%" height="auto"></a>
+
+
 ## Installation
 
 Install the prerequisites:
