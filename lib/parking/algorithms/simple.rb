@@ -15,24 +15,22 @@ module Parking
         *10.times.map { { brake: true } },
       ].freeze
 
-      attr_reader :cursor
-
-      def initialize
-        @cursor = 0
-      end
-
       def run(car)
+        action = iterator.next
+
         puts action.keys.join(", ")
 
         car.drive(**action)
+      rescue StopIteration
+        puts "idle"
 
-        @cursor += 1
+        car.drive
       end
 
       private
 
-      def action
-        ACTIONS[cursor] || {}
+      def iterator
+        @iterator ||= ACTIONS.each
       end
     end
   end
