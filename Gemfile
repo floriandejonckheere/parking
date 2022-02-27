@@ -13,6 +13,8 @@ gem "zeitwerk", "~> 2.4"
 
 gem "mittsu"
 
+gem "aasm"
+
 group :development, :test do
   gem "rubocop"
   gem "rubocop-performance"
