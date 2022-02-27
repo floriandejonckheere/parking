@@ -106,17 +106,13 @@ module Parking
 
         next algorithm.run(car) if Parking.options.automatic?
 
-        # Steer
-        car.steering_wheel.steer(
-          left: renderer.window.key_down?(GLFW_KEY_A),
-          right: renderer.window.key_down?(GLFW_KEY_D),
-        )
-
         # Drive
         car.drive(
           accelerate: renderer.window.key_down?(GLFW_KEY_W),
           reverse: renderer.window.key_down?(GLFW_KEY_S),
           brake: renderer.window.key_down?(GLFW_KEY_SPACE),
+          left: renderer.window.key_down?(GLFW_KEY_A),
+          right: renderer.window.key_down?(GLFW_KEY_D),
         )
       end
     end

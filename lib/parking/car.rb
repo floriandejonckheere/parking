@@ -35,11 +35,16 @@ module Parking
       rotation.y = (meta.direction * (Math::PI / 2))
     end
 
-    def drive(accelerate: false, reverse: false, brake: false)
+    def drive(accelerate: false, reverse: false, brake: false, left: false, right: false)
+      steering_wheel.steer(left:, right:)
+
+      # Calculate new position based on current heading and car controls
       dx, dz = engine.drive(rotation.y, accelerate:, reverse:, brake:)
 
+      # Calculate new heading based on speed
       dy = steering_wheel.turn(engine.speed)
 
+      # Update position and heading
       move(position.x + dx, position.z - dz, rotation.y + dy)
 
       # Aim camera backwards when reversing
