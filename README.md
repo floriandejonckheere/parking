@@ -54,7 +54,7 @@ The movement of the car is controlled by the algorithm.
 You can run the simulation with manual controls as well:
 
 ```
-  bin/parking --manual
+bin/parking --manual
 ```
 
 | **Key**                  | **Function**                    |
