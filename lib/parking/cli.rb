@@ -10,14 +10,14 @@ module Parking
     def initialize(args)
       @parser = OptionParser.new("#{File.basename($PROGRAM_NAME)} [global options] command") do |o|
         o.on("Global options:")
-        o.on("-w", "--width=WIDTH", Integer, "Screen width")
-        o.on("-H", "--height=WIDTH", Integer, "Screen height")
-        o.on("-m", "--model=MODEL", "Car model (default 'car')")
-        o.on("-a", "--automatic", "Park automatically")
-        o.on("-A", "--algorithm=ALGORITHM", "Use parking algorithm")
-        o.on("-l", "--algorithms", "Display parking algorithms") { algorithms }
-        o.on("-v", "--verbose", "Turn on verbose logging")
-        o.on("-D", "--debug", "Turn on debug logging")
+        o.on("--width=WIDTH", Integer, "Screen width")
+        o.on("--height=WIDTH", Integer, "Screen height")
+        o.on("--model=MODEL", "Car model (default 'car')")
+        o.on("--automatic", "Park automatically")
+        o.on("--algorithm=ALGORITHM", "Use parking algorithm")
+        o.on("--algorithms", "Display parking algorithms") { algorithms }
+        o.on("--verbose", "Turn on verbose logging")
+        o.on("--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
       end
 
