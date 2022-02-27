@@ -14,8 +14,10 @@ module Parking
         o.on("--height=WIDTH", Integer, "Screen height")
         o.on("--model=MODEL", "Car model (default 'car')")
         o.on("--automatic", "Park automatically")
-        o.on("--algorithm=ALGORITHM", "Use parking algorithm")
-        o.on("--algorithms", "Display parking algorithms") { algorithms }
+        o.on("--algorithm=ALGORITHM", "Use algorithm")
+        o.on("--algorithms", "Display algorithms") { algorithms }
+        o.on("--layout=LAYOUT", "Use parking layout")
+        o.on("--layouts", "Display parking layouts") { layouts }
         o.on("--verbose", "Turn on verbose logging")
         o.on("--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
@@ -55,11 +57,21 @@ module Parking
 
     def algorithms
       Parking.logger.info parser.to_s
-
       Parking.logger.info "Algorithms:"
 
       Parking::Algorithm.descendants.sort_by(&:name).each do |k|
         Parking.logger.info "    #{k.name.demodulize.underscore.ljust(20)}#{k.description}"
+      end
+
+      exit
+    end
+
+    def layouts
+      Parking.logger.info parser.to_s
+      Parking.logger.info "Layouts:"
+
+      Dir[Parking.root.join("res/layouts/*.yml")].each do |layout|
+        Parking.logger.info "    #{File.basename(layout, '.yml')}"
       end
 
       exit

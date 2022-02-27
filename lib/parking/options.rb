@@ -4,7 +4,7 @@ module Parking
   class Options
     attr_accessor :help
 
-    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm
+    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm, :layout
 
     def width
       @width ||= 1280
@@ -32,6 +32,10 @@ module Parking
 
     def algorithm
       @algorithm ||= "simple"
+    end
+
+    def layout
+      @layout ||= "parallel"
     end
 
     def verbose=(value)
