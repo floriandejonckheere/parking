@@ -2,3 +2,7 @@
 length: 6.0
 offset: 0.0
 body: Car_Cube Body
+bounding_box:
+  width: 2.1
+  length: 4.5
+  height: 3.0

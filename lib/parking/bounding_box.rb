@@ -2,11 +2,13 @@
 
 module Parking
   class BoundingBox < SimpleDelegator
-    WIDTH = 2.1
-    LENGTH = 4.5
-    HEIGHT = 3.0
+    attr_reader :width, :length, :height
 
-    def initialize
+    def initialize(width, length, height)
+      @width = width
+      @length = length
+      @height = height
+
       super(mesh)
     end
 
@@ -44,7 +46,7 @@ module Parking
     end
 
     def geometry
-      @geometry ||= Mittsu::BoxGeometry.new(WIDTH, HEIGHT, LENGTH)
+      @geometry ||= Mittsu::BoxGeometry.new(width, height, length)
     end
   end
 end

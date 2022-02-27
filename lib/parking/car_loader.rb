@@ -13,6 +13,7 @@ module Parking
 
         meta.color = color
         meta.direction = direction
+        meta.bounding_box = OpenStruct.new(meta.bounding_box)
 
         new(model, meta).tap do |car|
           car.receive_shadow = true

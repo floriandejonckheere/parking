@@ -155,7 +155,7 @@ module Parking
 
     def target
       Mittsu::Mesh.new(
-        Mittsu::BoxGeometry.new(BoundingBox::WIDTH, 0.01, BoundingBox::LENGTH),
+        Mittsu::BoxGeometry.new(car.bounding_box.width, 0.01, car.bounding_box.length),
         Mittsu::MeshBasicMaterial.new(color: 0x006cb3),
       ).tap do |target|
         target.rotation.y = Math::PI / 2

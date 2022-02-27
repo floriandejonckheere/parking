@@ -62,7 +62,7 @@ module Parking
     delegate :is_a?, to: :__getobj__
 
     def bounding_box
-      @bounding_box ||= BoundingBox.new
+      @bounding_box ||= BoundingBox.new(meta.bounding_box.width, meta.bounding_box.length, meta.bounding_box.height)
     end
 
     def steering_wheel
