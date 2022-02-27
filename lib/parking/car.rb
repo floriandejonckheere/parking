@@ -64,8 +64,8 @@ module Parking
       bounding_box.collides?(car.bounding_box)
     end
 
-    def score
-      (DISTANCE - Math.sqrt((position.x**2) + (position.z**2))).abs
+    def score(target)
+      (DISTANCE - Math.sqrt(((target.position.x - position.x)**2) + ((target.position.z = position.z)**2))).abs
     end
 
     delegate :is_a?, to: :__getobj__
