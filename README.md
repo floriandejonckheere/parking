@@ -4,6 +4,8 @@
 
 Self-parking car simulation.
 
+![Screenshot](https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif)
+
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png" width="49%" height="auto"></a>
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png" width="49%" height="auto"></a>
 
