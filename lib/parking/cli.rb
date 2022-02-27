@@ -15,6 +15,7 @@ module Parking
         o.on("-m", "--model=MODEL", "Car model (default 'car')")
         o.on("-a", "--automatic", "Park automatically")
         o.on("-A", "--algorithm=ALGORITHM", "Use parking algorithm")
+        o.on("-l", "--algorithms", "Display parking algorithms") { algorithms }
         o.on("-v", "--verbose", "Turn on verbose logging")
         o.on("-D", "--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
@@ -51,6 +52,18 @@ module Parking
     end
 
     private
+
+    def algorithms
+      Parking.logger.info parser.to_s
+
+      Parking.logger.info "Algorithms:"
+
+      Parking::Algorithm.descendants.sort_by(&:name).each do |k|
+        Parking.logger.info "    #{k.name.demodulize.underscore.ljust(20)}#{k.description}"
+      end
+
+      exit
+    end
 
     def usage(code: 1, tail: nil)
       Parking.logger.info parser.to_s

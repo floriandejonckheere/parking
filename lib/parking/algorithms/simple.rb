@@ -2,7 +2,7 @@
 
 module Parking
   module Algorithms
-    class Simple
+    class Simple < Algorithm
       ACTIONS = [
         *35.times.map { { accelerate: true } },
         *15.times.map { { brake: true } },
@@ -25,6 +25,10 @@ module Parking
         puts "idle"
 
         car.drive
+      end
+
+      def self.description
+        "Simple, step-based algorithm"
       end
 
       private
