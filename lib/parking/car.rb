@@ -11,7 +11,10 @@ module Parking
     # Scoring distance of parking position
     DISTANCE = 10.0
 
-    attr_reader :meta, :engine, :steering_wheel
+    # Damage modifier
+    DAMAGE = 0.1
+
+    attr_reader :meta, :engine, :steering_wheel, :damage
 
     def initialize(model, meta)
       super(model)
@@ -32,6 +35,8 @@ module Parking
       # Initialize car parts
       @steering_wheel = SteeringWheel.new
       @engine = Engine.new(rotation.y)
+
+      @damage = 0.0
 
       traverse do |child|
         child.material.color = meta.color if child.name == meta.body
@@ -54,6 +59,10 @@ module Parking
 
       bounding_box.position.set(x, position.y, z)
       bounding_box.rotation.y = ry
+    end
+
+    def collide
+      @damage += DAMAGE
     end
 
     def collides?(car)
