@@ -35,8 +35,8 @@ module Parking
       rotation.y = (meta.direction * (Math::PI / 2))
     end
 
-    def drive(accelerate: false, decelerate: false, brake: false)
-      dx, dz = engine.drive(rotation.y, accelerate:, decelerate:, brake:)
+    def drive(accelerate: false, reverse: false, brake: false)
+      dx, dz = engine.drive(rotation.y, accelerate:, reverse:, brake:)
 
       dy = steering_wheel.turn(engine.speed)
 

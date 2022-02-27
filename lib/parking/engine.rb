@@ -27,14 +27,14 @@ module Parking
       @ry = ry
     end
 
-    def drive(rotation, accelerate: false, decelerate: false, brake: false)
+    def drive(rotation, accelerate: false, reverse: false, brake: false)
       if brake
         # Driver pressed brake
         @speed = speed.negative? ? [speed + BRAKE, 0.0].min : [speed - BRAKE, 0.0].max
       elsif accelerate
         # Driver pressed accelerator
         @speed = [speed + ACCELERATION, MAX_SPEED].min
-      elsif decelerate
+      elsif reverse
         # Driver pressed decelerator (reverse)
         @speed = [speed - ACCELERATION, MIN_SPEED].max
       else
