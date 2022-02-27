@@ -41,14 +41,14 @@ module Parking
       dy = steering_wheel.turn(engine.speed)
 
       move(position.x + dx, position.z - dz, rotation.y + dy)
+
+      # Aim camera backwards when reversing
+      camera.rotation.y = (engine.speed.negative? ? 0.0 : Math::PI) unless engine.speed.zero?
     end
 
     def move(x, z, ry = rotation.y)
       position.set(x, position.y, z)
       rotation.y = ry
-
-      # Aim camera backwards when reversing
-      camera.rotation.y = (engine.speed.negative? ? 0.0 : Math::PI)
     end
 
     def collide
