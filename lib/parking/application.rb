@@ -9,11 +9,9 @@ module Parking
       # Add cars
       parked_cars.each do |car|
         scene.add(car)
-        scene.add(car.bounding_box)
       end
 
       scene.add(car)
-      scene.add(car.bounding_box)
 
       scene.print_tree
 

@@ -14,21 +14,24 @@ module Parking
     # Damage modifier
     DAMAGE = 0.1
 
-    attr_reader :meta, :damage
+    attr_reader :model, :meta, :damage
 
     def initialize(model, meta)
-      super(model)
-
+      @model = model
       @meta = meta
+
       @damage = 0.0
+
+      group.add(model)
+      group.add(bounding_box)
+
+      super(group)
 
       # Set to correct height
       position.y = meta.offset
-      bounding_box.position.y = position.y
 
       # Rotate to correct orientation
       rotation.y = (meta.direction * (Math::PI / 2))
-      bounding_box.rotation.y = rotation.y
     end
 
     def drive(accelerate: false, decelerate: false, brake: false)
@@ -42,9 +45,6 @@ module Parking
     def move(x, z, ry = rotation.y)
       position.set(x, position.y, z)
       rotation.y = ry
-
-      bounding_box.position.set(x, position.y, z)
-      bounding_box.rotation.y = ry
     end
 
     def collide
@@ -60,6 +60,10 @@ module Parking
     end
 
     delegate :is_a?, to: :__getobj__
+
+    def group
+      @group ||= Mittsu::Group.new
+    end
 
     def bounding_box
       @bounding_box ||= BoundingBox.new(meta.bounding_box.width, meta.bounding_box.length, meta.bounding_box.height)
