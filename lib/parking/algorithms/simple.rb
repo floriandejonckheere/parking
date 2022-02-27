@@ -28,11 +28,11 @@ module Parking
       def run
         action = iterator.next
 
-        puts action.keys.join(", ")
+        Parking.logger.info action.keys.join(", ") if Parking.options.debug?
 
         car.drive(**action)
       rescue StopIteration
-        puts "idle"
+        Parking.logger.info "idle" if Parking.options.debug?
 
         car.drive
       end

@@ -80,7 +80,7 @@ module Parking
         drive
 
         # Call corresponding action
-        puts aasm.current_state
+        Parking.logger.info aasm.current_state if Parking.options.debug?
         send(aasm.current_state)
       end
 
