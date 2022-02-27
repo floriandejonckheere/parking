@@ -139,8 +139,15 @@ module Parking
         Mittsu::BoxGeometry.new(car.bounding_box.width, 0.01, car.bounding_box.length),
         Mittsu::MeshBasicMaterial.new(color: 0x006cb3),
       ).tap do |target|
-        target.rotation.y = Math::PI / 2
         target.receive_shadow = true
+
+        # Set initial position
+        target.position.set(
+          layout.layout[:target].fetch(:x, 0.0),
+          layout.layout[:target].fetch(:y, 0.0),
+          layout.layout[:target].fetch(:z, 0.0),
+        )
+        target.rotation.y = layout.layout[:target].fetch(:d, 0.0) * (Math::PI / 2)
       end
     end
 

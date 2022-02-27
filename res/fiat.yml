@@ -1,5 +1,6 @@
 ---
 length: 5.0
+width: 2.0
 offset: 0.75
 body: robin.body_Cube robin.mainbodycolor
 bounding_box:

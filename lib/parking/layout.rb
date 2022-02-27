@@ -18,13 +18,11 @@ module Parking
           car.position.set(
             parked_car.fetch(:x, 0.0) * car.meta.length,
             parked_car.fetch(:y, 0.0),
-            parked_car.fetch(:z, 0.0),
+            parked_car.fetch(:z, 0.0) * car.meta.width,
           )
         end
       end
     end
-
-    private
 
     def layout
       @layout ||= YAML
