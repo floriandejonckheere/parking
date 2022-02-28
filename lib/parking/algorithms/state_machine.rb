@@ -8,7 +8,7 @@ module Parking
       include AASM
 
       # Float comparison threshold
-      THRESHOLD = 0.05
+      THRESHOLD = 0.1
 
       aasm whiny_transitions: false do
         state :idle, initial: true
