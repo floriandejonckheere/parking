@@ -13,6 +13,8 @@ module Parking
     end
 
     def start
+      $reset = false
+
       # Add cars
       parked_cars.each { |car| scene.add(car) }
       scene.add(car)
@@ -72,12 +74,16 @@ module Parking
           camera_container.sideways
         when GLFW_KEY_V
           @camera_mode = (camera_mode == :scene ? :car : :scene)
+        when GLFW_KEY_R
+          $reset = true
         when GLFW_KEY_Q
           exit
         end
       end
 
       renderer.window.run do
+        return if $reset
+
         renderer.render(scene, current_camera)
 
         parked_cars.each do |parked_car|

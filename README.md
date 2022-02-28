@@ -41,6 +41,7 @@ Click and drag to look around, scroll to zoom.
 | **Key**                  | **Function**                    |
 |--------------------------|---------------------------------|
 | V                        | Toggle scene/car camera         |
+| R                        | Reset simulation                |
 | Q                        | Quit application                |
 | **Scene camera options** |                                 |
 | Arrow keys               | Camera forward/backward up/down |

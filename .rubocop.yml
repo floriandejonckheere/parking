@@ -55,6 +55,9 @@ Style/ConditionalAssignment:
 Style/Documentation:
   Enabled: false
 
+Style/GlobalVars:
+  Enabled: false
+
 Style/OpenStructUse:
   Enabled: false
 
