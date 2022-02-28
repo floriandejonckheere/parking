@@ -5,7 +5,7 @@
 Self-parking car simulation.
 
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenrecording0.gif" width="49%" height="auto"></a>
-<a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot0.png" width="49%" height="auto"></a>
+<a href="https://github.com/floriandejonckheere/parking/raw/master/screenrecording1.gif"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenrecording1.gif" width="49%" height="auto"></a>
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot1.png" width="49%" height="auto"></a>
 <a href="https://github.com/floriandejonckheere/parking/raw/master/screenshot2.png"><img src="https://github.com/floriandejonckheere/parking/raw/master/screenshot2.png" width="49%" height="auto"></a>
 
