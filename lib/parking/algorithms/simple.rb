@@ -5,23 +5,23 @@ module Parking
     class Simple < Algorithm
       ACTIONS = {
         parallel: [
-          *35.times.map { { accelerate: true } },
-          *15.times.map { { brake: true } },
-          *38.times.map { { reverse: true, right: true } },
-          *13.times.map { { reverse: true } },
-          *30.times.map { { reverse: true, left: true } },
-          *5.times.map { { left: true } },
-          *4.times.map { { accelerate: true, right: true } },
-          *30.times.map { { accelerate: true } },
-          *10.times.map { { brake: true } },
+          [35, { accelerate: true }],
+          [15, { brake: true }],
+          [38, { reverse: true, right: true }],
+          [13, { reverse: true }],
+          [30, { reverse: true, left: true }],
+          [5, { left: true }],
+          [4, { accelerate: true, right: true }],
+          [30, { accelerate: true }],
+          [10, { brake: true }],
         ],
         reverse: [
-          *32.times.map { { accelerate: true } },
-          *30.times.map { { brake: true } },
-          *2.times.map { { reverse: true } },
-          *61.times.map { { reverse: true, right: true } },
-          *11.times.map { { reverse: true } },
-          *15.times.map { { brake: true } },
+          [32, { accelerate: true }],
+          [30, { brake: true }],
+          [2, { reverse: true }],
+          [61, { reverse: true, right: true }],
+          [11, { reverse: true }],
+          [15, { brake: true }],
         ],
       }.freeze
 
@@ -44,7 +44,7 @@ module Parking
       private
 
       def iterator
-        @iterator ||= ACTIONS[Parking.options.layout.to_sym].each
+        @iterator ||= Iterator.new(ACTIONS[Parking.options.layout.to_sym])
       end
 
       def log(action)
