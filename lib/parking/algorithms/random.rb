@@ -52,15 +52,11 @@ module Parking
 
       def mutate(numbers)
         # Mutate numbers with 25% chance
-        numbers.map { |n| random.rand(0..4).zero? ? n + random.rand(-5..5) : n }
+        numbers.map { |n| Parking.random.rand(0..4).zero? ? n + Parking.random.rand(-5..5) : n }
       end
 
       def iterator
         @iterator ||= Iterator.new(numbers.zip(actions.map(&:last)))
-      end
-
-      def random
-        @random ||= ::Random.new
       end
     end
   end

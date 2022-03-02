@@ -23,6 +23,10 @@ module Parking
       @logger ||= Logger.new
     end
 
+    def random
+      @random ||= Random.new
+    end
+
     def setup
       @loader = Zeitwerk::Loader.for_gem
 
