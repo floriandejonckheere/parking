@@ -17,6 +17,9 @@ module Parking
           .zip(other.genes)
           .map(&:sample)
 
+        # Mutate genes
+        offspring.map! { |n| Parking.random.rand(0..10).zero? ? n + Parking.random.rand(-2..2) : n }
+
         self.class.new(offspring)
       end
 
