@@ -43,8 +43,12 @@ module Parking
 
       private
 
+      def actions
+        ACTIONS[Parking.options.layout.to_sym]
+      end
+
       def iterator
-        @iterator ||= Iterator.new(ACTIONS[Parking.options.layout.to_sym])
+        @iterator ||= Iterator.new(actions)
       end
 
       def log(action)

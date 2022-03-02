@@ -3,44 +3,66 @@
 module Parking
   module Algorithms
     class Random < Simple
+      # Maximum number of attempts
+      MAX_ATTEMPTS = 5
+
+      attr_reader :attempt, :results
+
+      def initialize(...)
+        super
+
+        @attempt = 0
+        @results = {}
+
+        mutate
+      end
+
       def run
         action = iterator.next
 
-        log(action)
-
         car.drive(**action)
       rescue StopIteration
-        puts "Final score for #{numbers} = #{car.score(target)}"
+        results[numbers] = car.score(target)
+
+        Parking.logger.debug "Score for attempt #{attempt} #{numbers} = #{car.score(target)}"
+
+        if (@attempt += 1) == MAX_ATTEMPTS
+          result, score = results.max_by(&:last)
+          Parking.logger.info "Best score: #{score.truncate(2)} with input #{result}"
+
+          exit
+        end
 
         # Reset simulation
         @iterator = nil
+
+        # Mutate numbers
+        mutate
 
         reset.call
       end
 
       def self.description
-        "Random algorithm"
+        "Randomized selection algorithm"
       end
 
       private
 
       def numbers
-        [35, 15, 38, 13, 30, 5, 4, 30, 10]
+        @numbers ||= actions.map(&:first)
+      end
+
+      def mutate
+        # Mutate numbers with 25% chance
+        numbers.map! { |n| random.rand(0..4).zero? ? n + random.rand(-5..5) : n }
       end
 
       def iterator
-        @iterator ||= Iterator.new(numbers.zip(ACTIONS[Parking.options.layout.to_sym].map(&:last)))
+        @iterator ||= Iterator.new(numbers.zip(actions.map(&:last)))
       end
 
-      def log(action)
-        return unless Parking.options.debug?
-
-        # Don't log actions twice
-        return if @action == action
-
-        Parking.logger.info action.keys.join(", ")
-
-        @action = action
+      def random
+        @random ||= ::Random.new
       end
     end
   end
