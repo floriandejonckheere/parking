@@ -9,7 +9,7 @@ module Parking
     RIGHT = 1.0
 
     # Damage modifier
-    DAMAGE = 0.1
+    DAMAGE = 0.05
 
     attr_reader :model, :meta, :damage
 
