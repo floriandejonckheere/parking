@@ -16,7 +16,7 @@ module Parking
     end
 
     def score
-      (DISTANCE - Math.sqrt(((target.position.x - subject.position.x)**2) + ((target.position.z - subject.position.z)**2))).abs
+      DISTANCE - Math.sqrt(((target.position.x - subject.position.x)**2) + ((target.position.z - subject.position.z)**2))
     end
   end
 end
