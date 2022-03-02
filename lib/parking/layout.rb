@@ -41,6 +41,10 @@ module Parking
       end
     end
 
+    def reset
+      @car = nil
+    end
+
     private
 
     def layout

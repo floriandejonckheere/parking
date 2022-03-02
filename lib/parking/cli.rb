@@ -42,13 +42,9 @@ module Parking
     end
 
     def start
-      loop do
-        Parking::Application
-          .new
-          .start
-
-        break unless $reset
-      end
+      Parking::Application
+        .new
+        .start
     rescue UsageError => e
       # Don't print tail if no message was passed
       return usage if e.message == e.class.name
