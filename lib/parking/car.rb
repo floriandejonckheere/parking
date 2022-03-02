@@ -62,7 +62,7 @@ module Parking
     end
 
     def score(target)
-      Score.new(self, target).score - damage
+      [Score.new(self, target).score - damage, 0.0].max
     end
 
     delegate :is_a?, to: :__getobj__
