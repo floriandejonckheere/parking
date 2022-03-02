@@ -2,7 +2,8 @@
 
 module Parking
   class Algorithm
-    attr_reader :car, :target
+    attr_accessor :car
+    attr_reader :target
 
     def initialize(car, target)
       @car = car

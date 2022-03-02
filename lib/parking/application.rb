@@ -120,6 +120,7 @@ module Parking
       scene.remove(car)
 
       layout.reset
+      algorithm.car = car
 
       scene.add(car)
     end
