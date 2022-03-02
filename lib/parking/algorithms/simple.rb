@@ -28,11 +28,11 @@ module Parking
       def run
         action = iterator.next
 
-        Parking.logger.info action.keys.join(", ") if Parking.options.debug?
+        log(action)
 
         car.drive(**action)
       rescue StopIteration
-        Parking.logger.info "idle" if Parking.options.debug?
+        log(idle: true)
 
         car.drive
       end
@@ -45,6 +45,17 @@ module Parking
 
       def iterator
         @iterator ||= ACTIONS[Parking.options.layout.to_sym].each
+      end
+
+      def log(action)
+        return unless Parking.options.debug?
+
+        # Don't log actions twice
+        return if @action == action
+
+        Parking.logger.info action.keys.join(", ")
+
+        @action = action
       end
     end
   end
