@@ -14,7 +14,7 @@ module Parking
     private
 
     def level
-      Parking.options.verbose? ? "debug" : "info"
+      Parking.options.debug? ? "debug" : "info"
     end
 
     def formatter

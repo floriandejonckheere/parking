@@ -48,12 +48,10 @@ module Parking
       end
 
       def log(action)
-        return unless Parking.options.debug?
-
         # Don't log actions twice
         return if @action == action
 
-        Parking.logger.info action.keys.join(", ")
+        Parking.logger.debug action.keys.join(", ")
 
         @action = action
       end

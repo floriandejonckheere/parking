@@ -6,16 +6,6 @@ describe Parking::CLI do
   # around { |example| suppress_output { example.run } }
 
   describe "options" do
-    describe "--verbose" do
-      let(:args) { ["--verbose"] }
-
-      it "turns on verbose output" do
-        cli
-
-        expect(Parking.options).to be_verbose
-      end
-    end
-
     describe "--debug" do
       let(:args) { ["--debug"] }
 

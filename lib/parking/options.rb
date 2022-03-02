@@ -46,18 +46,6 @@ module Parking
       damage.present?
     end
 
-    def verbose=(value)
-      @verbose = value.present?
-    end
-
-    def verbose
-      @verbose ||= false
-    end
-
-    def verbose?
-      verbose.present?
-    end
-
     def debug=(value)
       @debug = value.present?
     end
