@@ -4,7 +4,7 @@ module Parking
   class Options
     attr_accessor :help
 
-    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm, :layout
+    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm, :layout, :damage
 
     def width
       @width ||= 1280
@@ -36,6 +36,10 @@ module Parking
 
     def layout
       @layout ||= "parallel"
+    end
+
+    def damage
+      @damage.nil? ? @damage = true : @damage
     end
 
     def verbose=(value)

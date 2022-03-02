@@ -18,6 +18,7 @@ module Parking
         o.on("--algorithms", "Display algorithms") { algorithms }
         o.on("--layout=LAYOUT", "Use parking layout")
         o.on("--layouts", "Display parking layouts") { layouts }
+        o.on("--[no-]damage", "Use damage in score calculation")
         o.on("--verbose", "Turn on verbose logging")
         o.on("--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
