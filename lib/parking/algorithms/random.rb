@@ -13,8 +13,6 @@ module Parking
 
         @attempt = 0
         @results = {}
-
-        mutate
       end
 
       def run
@@ -37,7 +35,7 @@ module Parking
         @iterator = nil
 
         # Mutate numbers
-        mutate
+        @numbers = mutate(numbers)
 
         reset.call
       end
@@ -49,12 +47,12 @@ module Parking
       private
 
       def numbers
-        @numbers ||= actions.map(&:first)
+        @numbers ||= mutate(actions.map(&:first))
       end
 
-      def mutate
+      def mutate(numbers)
         # Mutate numbers with 25% chance
-        numbers.map! { |n| random.rand(0..4).zero? ? n + random.rand(-5..5) : n }
+        numbers.map { |n| random.rand(0..4).zero? ? n + random.rand(-5..5) : n }
       end
 
       def iterator
