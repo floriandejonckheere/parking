@@ -126,7 +126,7 @@ module Parking
     end
 
     def algorithm
-      @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new(car, target)
+      @algorithm ||= "Parking::Algorithms::#{Parking.options.algorithm.camelize}".constantize.new(car, target, method(:reset))
     end
 
     def layout

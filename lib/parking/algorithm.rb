@@ -3,11 +3,12 @@
 module Parking
   class Algorithm
     attr_accessor :car
-    attr_reader :target
+    attr_reader :target, :reset
 
-    def initialize(car, target)
+    def initialize(car, target, reset)
       @car = car
       @target = target
+      @reset = reset
     end
 
     ##
