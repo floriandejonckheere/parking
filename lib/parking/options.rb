@@ -42,6 +42,10 @@ module Parking
       @damage.nil? ? @damage = true : @damage
     end
 
+    def damage?
+      damage.present?
+    end
+
     def verbose=(value)
       @verbose = value.present?
     end
