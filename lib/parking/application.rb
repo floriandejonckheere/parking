@@ -128,7 +128,7 @@ module Parking
       @layout ||= Layout.new
     end
 
-    delegate :car, :parked_cars, to: :layout
+    delegate :car, :parked_cars, :target, to: :layout
 
     def floor
       Mittsu::Mesh.new(
@@ -137,23 +137,6 @@ module Parking
       ).tap do |floor|
         floor.position.y = -0.5
         floor.receive_shadow = true
-      end
-    end
-
-    def target
-      Mittsu::Mesh.new(
-        Mittsu::BoxGeometry.new(car.bounding_box.width, 0.01, car.bounding_box.length),
-        Mittsu::MeshBasicMaterial.new(color: 0x006cb3),
-      ).tap do |target|
-        target.receive_shadow = true
-
-        # Set initial position
-        target.position.set(
-          layout.layout[:target].fetch(:x, 0.0),
-          layout.layout[:target].fetch(:y, 0.0),
-          layout.layout[:target].fetch(:z, 0.0),
-        )
-        target.rotation.y = layout.layout[:target].fetch(:d, 0.0) * (Math::PI / 2)
       end
     end
 
