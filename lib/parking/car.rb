@@ -8,9 +8,6 @@ module Parking
     LEFT = -1.0
     RIGHT = 1.0
 
-    # Scoring distance of parking position
-    DISTANCE = 10.0
-
     # Damage modifier
     DAMAGE = 0.1
 
@@ -65,7 +62,7 @@ module Parking
     end
 
     def score(target)
-      (DISTANCE - Math.sqrt(((target.position.x - position.x)**2) + ((target.position.z = position.z)**2))).abs
+      Score.new(self, target).score - damage
     end
 
     delegate :is_a?, to: :__getobj__
