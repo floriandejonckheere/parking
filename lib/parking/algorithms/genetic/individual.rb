@@ -5,7 +5,6 @@ module Parking
     class Genetic
       class Individual
         attr_reader :genes
-        attr_accessor :fitness
 
         def initialize(genes, fitness = nil)
           @genes = genes
@@ -22,6 +21,14 @@ module Parking
           offspring.map! { |n| Parking.random.rand(0..10).zero? ? n + Parking.random.rand(-2..2) : n }
 
           self.class.new(offspring)
+        end
+
+        def fitness
+          @fitness ||= Database.read(genes)
+        end
+
+        def fitness=(value)
+          @fitness = Database.write(genes, value)
         end
 
         def inspect
