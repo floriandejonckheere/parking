@@ -4,7 +4,7 @@ module Parking
   class Options
     attr_accessor :help
 
-    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm, :layout, :damage
+    attr_writer :width, :height, :fiat, :model, :automatic, :algorithm, :layout, :damage, :seed
 
     def width
       @width ||= 1280
@@ -44,6 +44,10 @@ module Parking
 
     def damage?
       damage.present?
+    end
+
+    def seed
+      @seed ||= Random.new_seed
     end
 
     def debug=(value)

@@ -24,7 +24,7 @@ module Parking
     end
 
     def random
-      @random ||= Random.new
+      @random ||= Random.new(options.seed)
     end
 
     def setup

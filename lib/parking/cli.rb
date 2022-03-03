@@ -19,7 +19,7 @@ module Parking
         o.on("--layout=LAYOUT", "Use parking layout")
         o.on("--layouts", "Display parking layouts") { layouts }
         o.on("--[no-]damage", "Use damage in score calculation")
-        o.on("--seed=SEED", "Set random seed") { |s| srand s }
+        o.on("--seed=SEED", "Set random seed", Integer)
         o.on("--debug", "Turn on debug logging")
         o.on("-h", "--help", "Display this message") { usage }
       end

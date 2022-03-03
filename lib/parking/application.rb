@@ -13,6 +13,8 @@ module Parking
     end
 
     def start
+      Parking.logger.info "Initializing random seed #{Parking.options.seed}"
+
       # Add cars
       parked_cars.each { |car| scene.add(car) }
       scene.add(car)
