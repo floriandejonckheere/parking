@@ -19,8 +19,6 @@ module Parking
       parked_cars.each { |car| scene.add(car) }
       scene.add(car)
 
-      scene.print_tree if Parking.options.debug?
-
       # Add floor
       scene.add(floor)
       scene.add(target)
