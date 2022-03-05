@@ -19,7 +19,11 @@ module Parking
         end
 
         def self.database
-          @database ||= YAML.load_file(Parking.root.join("lib/parking/algorithms/genetic/fitness.yml"))
+          @database ||= begin
+            YAML.load_file(Parking.root.join("lib/parking/algorithms/genetic/fitness.yml"))
+          rescue Errno::ENOENT
+            {}
+          end
         end
       end
     end
