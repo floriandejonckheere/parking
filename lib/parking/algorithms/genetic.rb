@@ -13,17 +13,19 @@ module Parking
       end
 
       def run
-        action = action_iterator.next
+        individual, action = iterator.next
 
-        car.drive(**action)
-      rescue StopIteration
+        exit unless individual
+
+        return car.drive(**action) if action
+
         # Compute fitness
         individual.fitness = car.score(target)
 
         Parking.logger.debug "Score for individual #{individual}"
 
         # Start selection phase only if fitness was computed for all individuals
-        return rereset unless population.all?(&:fitness)
+        return reset.call unless population.all?(&:fitness)
 
         # Selection of fittest individuals
         father, mother = population.sort_by(&:fitness).last(2)
@@ -43,8 +45,7 @@ module Parking
         population << child
         Parking.logger.debug "Population: #{population}"
 
-        # Reset simulation
-        rereset
+        reset.call
       end
 
       def self.description
@@ -53,23 +54,8 @@ module Parking
 
       private
 
-      def rereset
-        @individual = population_iterator.next
-        @action_iterator = nil
-
-        reset.call
-      end
-
-      def population_iterator
-        @population_iterator ||= population.each
-      end
-
-      def individual
-        @individual ||= population_iterator.next
-      end
-
-      def action_iterator
-        @action_iterator ||= Iterator.new(individual.genes.zip(actions.map(&:last)))
+      def iterator
+        @iterator ||= Iterator.new(population)
       end
     end
   end
