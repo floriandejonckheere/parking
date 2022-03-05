@@ -4,11 +4,11 @@ module Parking
   module Algorithms
     class Genetic
       class Individual
-        attr_reader :genes
+        attr_reader :genes, :generation
 
-        def initialize(genes, fitness = nil)
+        def initialize(genes, generation = 0)
           @genes = genes
-          @fitness = fitness
+          @generation = generation
         end
 
         def crossover(other)
@@ -20,7 +20,7 @@ module Parking
           # Mutate genes
           offspring.map! { |n| Parking.random.rand(0..10).zero? ? n + Parking.random.rand(-2..2) : n }
 
-          self.class.new(offspring)
+          self.class.new(offspring, generation + 1)
         end
 
         def fitness
@@ -32,7 +32,7 @@ module Parking
         end
 
         def inspect
-          "[#{genes.join('-')} F:#{fitness&.truncate(2)}]"
+          "[#{genes.join('-')} F:#{fitness&.truncate(2)} G:#{generation}]"
         end
         alias to_s inspect
       end
