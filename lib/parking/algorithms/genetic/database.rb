@@ -5,12 +5,10 @@ module Parking
     class Genetic
       class Database
         def self.read(genes)
-          Parking.logger.debug "Reading #{genes.join('-')}: #{database[genes.join('-')]}"
           database[genes.join("-")]
         end
 
         def self.write(genes, fitness)
-          Parking.logger.debug "Writing #{genes.join('-')}: #{fitness}"
           database[genes.join("-")] = fitness
 
           File.write(Parking.root.join("lib/parking/algorithms/genetic/fitness.yml"), database.to_yaml)
