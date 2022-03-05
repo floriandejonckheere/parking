@@ -15,7 +15,7 @@ module Parking
           # Instead of using a crossover point, randomize gene selection from parent
           offspring = genes
             .zip(other.genes)
-            .map(&:sample)
+            .map { |g| g.sample(random: Parking.random) }
 
           # Mutate genes
           offspring.map! { |n| Parking.random.rand(0..10).zero? ? n + Parking.random.rand(-2..2) : n }
