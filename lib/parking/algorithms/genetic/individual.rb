@@ -32,7 +32,7 @@ module Parking
         end
 
         def inspect
-          "[#{genes.join(', ')}] => #{fitness&.truncate(2)}"
+          "[#{genes.join('-')} F:#{fitness&.truncate(2)}]"
         end
         alias to_s inspect
       end
